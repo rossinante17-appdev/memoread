@@ -32,6 +32,40 @@
   </head>
 
   <body>
+
+    <ul>
+
+      <li><a href="/">Home</a></li>
+
+      <% if @current_user.present? %>
+
+        <li><%= @current_user.username %></li>
+        <li><a href="/user_sign_out">Sign Out</a></li>
+        
+      <% else %>
+
+        <li><a href="/user_sign_in">Sign In</a></li>
+        <li><a href="/user_sign_up">Sign Up</a></li>
+
+      <% end %>
+
+    </ul>
+
+    <% if notice.present? %>
+
+      <div>
+        <span><%= notice %></span>
+      </div>
+
+    <% end %>
+
+    <% if alert.present? %>
+
+      <span><%= alert %></span>
+
+    <% end %>
+
     <%= yield %>
+
   </body>
 </html>

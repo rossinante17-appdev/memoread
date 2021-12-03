@@ -1,6 +1,6 @@
 class UserAuthenticationController < ApplicationController
   # Uncomment this if you want to force users to sign in before any other actions
-  # skip_before_action(:force_user_sign_in, only: [:sign_up_form, :create, :sign_in_form, :create_cookie])
+  skip_before_action(:force_user_sign_in, only: [:sign_up_form, :create, :sign_in_form, :create_cookie])
 
   def sign_in_form
     
@@ -46,9 +46,6 @@ class UserAuthenticationController < ApplicationController
     @user.username = params.fetch("query_username")
     @user.phone = params.fetch("query_phone")
     @user.private = params.fetch("query_private", false)
-    @user.articles_count = params.fetch("query_articles_count")
-    @user.summaries_count = params.fetch("query_summaries_count")
-    @user.folders_count = params.fetch("query_folders_count")
 
     save_status = @user.save
 
