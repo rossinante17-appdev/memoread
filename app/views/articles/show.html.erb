@@ -1,0 +1,222 @@
+<div>
+  <div>
+    <h1>
+      Article #<%= @the_article.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/articles">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_article/<%= @the_article.id %>">
+          Delete article
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Url
+      </dt>
+      <dd>
+        <%= @the_article.url %>
+      </dd>
+
+      <dt>
+        Headline
+      </dt>
+      <dd>
+        <%= @the_article.headline %>
+      </dd>
+
+      <dt>
+        Summary
+      </dt>
+      <dd>
+        <%= @the_article.summary_id %>
+      </dd>
+
+      <dt>
+        Source
+      </dt>
+      <dd>
+        <%= @the_article.source_id %>
+      </dd>
+
+      <dt>
+        Public
+      </dt>
+      <dd>
+        <%= @the_article.public %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_article.user_id %>
+      </dd>
+
+      <dt>
+        Unread boolean
+      </dt>
+      <dd>
+        <%= @the_article.unread_boolean %>
+      </dd>
+
+      <dt>
+        Email
+      </dt>
+      <dd>
+        <%= @the_article.email %>
+      </dd>
+
+      <dt>
+        Text
+      </dt>
+      <dd>
+        <%= @the_article.text %>
+      </dd>
+
+      <dt>
+        Reread list
+      </dt>
+      <dd>
+        <%= @the_article.reread_list %>
+      </dd>
+
+      <dt>
+        Read at
+      </dt>
+      <dd>
+        <%= @the_article.read_at %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_article.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_article.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit article
+    </h2>
+
+    <form action="/modify_article/<%= @the_article.id %>"  method="post" >
+      <div>
+        <label for="url_box">
+          Url
+        </label>
+
+        <input type="text" id="url_box" name="query_url" value="<%= @the_article.url %>">
+      </div>
+
+      <div>
+        <label for="headline_box">
+          Headline
+        </label>
+
+        <input type="text" id="headline_box" name="query_headline" value="<%= @the_article.headline %>">
+      </div>
+
+      <div>
+        <label for="summary_id_box">
+          Summary
+        </label>
+
+        <input type="text" id="summary_id_box" name="query_summary_id" value="<%= @the_article.summary_id %>">
+      </div>
+
+      <div>
+        <label for="source_id_box">
+          Source
+        </label>
+
+        <input type="text" id="source_id_box" name="query_source_id" value="<%= @the_article.source_id %>">
+      </div>
+
+      <div>
+        <input type="checkbox" id="public_box" name="query_public" value="1" <%= "checked" if @the_article.public %>>
+
+        <label for="public_box">
+            Public
+        </label>
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_article.user_id %>">
+      </div>
+
+      <div>
+        <label for="unread_boolean_box">
+          Unread boolean
+        </label>
+
+        <input type="text" id="unread_boolean_box" name="query_unread_boolean" value="<%= @the_article.unread_boolean %>">
+      </div>
+
+      <div>
+        <input type="checkbox" id="email_box" name="query_email" value="1" <%= "checked" if @the_article.email %>>
+
+        <label for="email_box">
+            Email
+        </label>
+      </div>
+
+      <div>
+        <input type="checkbox" id="text_box" name="query_text" value="1" <%= "checked" if @the_article.text %>>
+
+        <label for="text_box">
+            Text
+        </label>
+      </div>
+
+      <div>
+        <input type="checkbox" id="reread_list_box" name="query_reread_list" value="1" <%= "checked" if @the_article.reread_list %>>
+
+        <label for="reread_list_box">
+            Reread list
+        </label>
+      </div>
+
+      <div>
+        <label for="read_at_box">
+          Read at
+        </label>
+
+        <input type="datetime-local" id="read_at_box" name="query_read_at"
+         value="<%= @the_article.read_at %>">
+      </div>
+
+      <button>
+        Update article
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

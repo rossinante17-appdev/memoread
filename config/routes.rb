@@ -1,5 +1,24 @@
 Rails.application.routes.draw do
 
+  # Routes for the Article resource:
+
+  # CREATE
+  post("/insert_article", { :controller => "articles", :action => "create" })
+          
+  # READ
+  get("/articles", { :controller => "articles", :action => "index" })
+  
+  get("/articles/:path_id", { :controller => "articles", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_article/:path_id", { :controller => "articles", :action => "update" })
+  
+  # DELETE
+  get("/delete_article/:path_id", { :controller => "articles", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the User account:
 
   # SIGN UP FORM

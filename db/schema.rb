@@ -10,6 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_12_03_203709) do
+
+  create_table "articles", force: :cascade do |t|
+    t.string "url"
+    t.string "headline"
+    t.integer "summary_id"
+    t.integer "source_id"
+    t.boolean "public"
+    t.integer "user_id"
+    t.string "unread_boolean"
+    t.boolean "email"
+    t.boolean "text"
+    t.boolean "reread_list"
+    t.datetime "read_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.string "username"
+    t.string "phone"
+    t.boolean "private"
+    t.integer "articles_count"
+    t.integer "summaries_count"
+    t.integer "folders_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end

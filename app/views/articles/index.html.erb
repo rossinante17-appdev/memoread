@@ -1,0 +1,238 @@
+<div>
+  <div>
+    <h1>
+      List of all articles
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new article
+    </h2>
+
+    <form action="/insert_article" method="post">
+      <div>
+        <label for="url_box">
+          Url
+        </label>
+
+        <input type="text" id="url_box" name="query_url">
+      </div>
+
+      <div>
+        <label for="headline_box">
+          Headline
+        </label>
+
+        <input type="text" id="headline_box" name="query_headline">
+      </div>
+
+      <div>
+        <label for="summary_id_box">
+          Summary
+        </label>
+
+        <input type="text" id="summary_id_box" name="query_summary_id">
+      </div>
+
+      <div>
+        <label for="source_id_box">
+          Source
+        </label>
+
+        <input type="text" id="source_id_box" name="query_source_id">
+      </div>
+
+      <div>
+        <input type="checkbox" id="public_box" name="query_public" value="1">
+
+        <label for="public_box">Public</label>
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="unread_boolean_box">
+          Unread boolean
+        </label>
+
+        <input type="text" id="unread_boolean_box" name="query_unread_boolean">
+      </div>
+
+      <div>
+        <input type="checkbox" id="email_box" name="query_email" value="1">
+
+        <label for="email_box">Email</label>
+      </div>
+
+      <div>
+        <input type="checkbox" id="text_box" name="query_text" value="1">
+
+        <label for="text_box">Text</label>
+      </div>
+
+      <div>
+        <input type="checkbox" id="reread_list_box" name="query_reread_list" value="1">
+
+        <label for="reread_list_box">Reread list</label>
+      </div>
+
+      <div>
+        <label for="read_at_box">
+          Read at
+        </label>
+
+        <input type="datetime-local" id="read_at_box" name="query_read_at">
+      </div>
+
+      <button>
+        Create article
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Url
+        </th>
+
+        <th>
+          Headline
+        </th>
+
+        <th>
+          Summary
+        </th>
+
+        <th>
+          Source
+        </th>
+
+        <th>
+          Public
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Unread boolean
+        </th>
+
+        <th>
+          Email
+        </th>
+
+        <th>
+          Text
+        </th>
+
+        <th>
+          Reread list
+        </th>
+
+        <th>
+          Read at
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_articles.each do |an_article| %>
+      <tr>
+        <td>
+          <%= an_article.id %>
+        </td>
+
+        <td>
+          <%= an_article.url %>
+        </td>
+
+        <td>
+          <%= an_article.headline %>
+        </td>
+
+        <td>
+          <%= an_article.summary_id %>
+        </td>
+
+        <td>
+          <%= an_article.source_id %>
+        </td>
+
+        <td>
+          <%= an_article.public %>
+        </td>
+
+        <td>
+          <%= an_article.user_id %>
+        </td>
+
+        <td>
+          <%= an_article.unread_boolean %>
+        </td>
+
+        <td>
+          <%= an_article.email %>
+        </td>
+
+        <td>
+          <%= an_article.text %>
+        </td>
+
+        <td>
+          <%= an_article.reread_list %>
+        </td>
+
+        <td>
+          <%= an_article.read_at %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_article.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_article.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/articles/<%= an_article.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
