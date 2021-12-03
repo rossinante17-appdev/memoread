@@ -1,10 +1,49 @@
 <div>
+  
   <div>
     <h1>
-      List of all articles
+      <%= @current_user.username %>'s articles
     </h1>
   </div>
+
 </div>
+
+<table border="1">
+
+  <tr>
+    <th></th>
+    <th>Article</th>
+    <th>Source</th>
+    <th>Read?</th>
+    <th>Summary</th>
+    <th>Added on</th>
+  <tr>
+
+  <% @list_of_articles.each do |an_article| %>
+
+    <tr>
+
+      <td><img src="https://robohash.org/<%= an_article.id %>">
+      <td><a href="<%= an_article.url %>"><%= an_article.headline %></a></td>
+      <td>source placeholder</td>
+      <% if an_article.read_at.present? %>
+
+        <td>Read</td>
+
+      <% else %>
+
+        <td>Unread</td>
+
+      <% end %>
+      <td>summary placeholder</td>
+
+      <td><%= an_article.created_at.strftime("%B %d, %Y") %>
+
+    </tr>
+
+  <% end %>
+
+</table>
 
 <hr>
 
@@ -99,139 +138,6 @@
         Create article
       </button>
     </form>
-  </div>
-</div>
-
-<hr>
-<div>
-  <div>
-    <table>
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Url
-        </th>
-
-        <th>
-          Headline
-        </th>
-
-        <th>
-          Summary
-        </th>
-
-        <th>
-          Source
-        </th>
-
-        <th>
-          Public
-        </th>
-
-        <th>
-          User
-        </th>
-
-        <th>
-          Unread boolean
-        </th>
-
-        <th>
-          Email
-        </th>
-
-        <th>
-          Text
-        </th>
-
-        <th>
-          Reread list
-        </th>
-
-        <th>
-          Read at
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_articles.each do |an_article| %>
-      <tr>
-        <td>
-          <%= an_article.id %>
-        </td>
-
-        <td>
-          <%= an_article.url %>
-        </td>
-
-        <td>
-          <%= an_article.headline %>
-        </td>
-
-        <td>
-          <%= an_article.summary_id %>
-        </td>
-
-        <td>
-          <%= an_article.source_id %>
-        </td>
-
-        <td>
-          <%= an_article.public %>
-        </td>
-
-        <td>
-          <%= an_article.user_id %>
-        </td>
-
-        <td>
-          <%= an_article.unread_boolean %>
-        </td>
-
-        <td>
-          <%= an_article.email %>
-        </td>
-
-        <td>
-          <%= an_article.text %>
-        </td>
-
-        <td>
-          <%= an_article.reread_list %>
-        </td>
-
-        <td>
-          <%= an_article.read_at %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(an_article.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(an_article.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/articles/<%= an_article.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
   </div>
 </div>
 

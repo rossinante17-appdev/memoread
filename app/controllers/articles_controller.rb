@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    matching_articles = Article.all
+    matching_articles = @current_user.articles
 
     @list_of_articles = matching_articles.order({ :created_at => :desc })
 
