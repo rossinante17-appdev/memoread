@@ -1,0 +1,132 @@
+<div>
+  <div>
+    <h1>
+      List of all takeaways
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new takeaway
+    </h2>
+
+    <form action="/insert_takeaway" method="post">
+      <div>
+        <label for="body_box">
+          Body
+        </label>
+
+        <input type="text" id="body_box" name="query_body">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="article_id_box">
+          Article
+        </label>
+
+        <input type="text" id="article_id_box" name="query_article_id">
+      </div>
+
+      <div>
+        <input type="checkbox" id="public_box" name="query_public" value="1">
+
+        <label for="public_box">Public</label>
+      </div>
+
+      <button>
+        Create takeaway
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Body
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Article
+        </th>
+
+        <th>
+          Public
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_takeaways.each do |a_takeaway| %>
+      <tr>
+        <td>
+          <%= a_takeaway.id %>
+        </td>
+
+        <td>
+          <%= a_takeaway.body %>
+        </td>
+
+        <td>
+          <%= a_takeaway.user_id %>
+        </td>
+
+        <td>
+          <%= a_takeaway.article_id %>
+        </td>
+
+        <td>
+          <%= a_takeaway.public %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_takeaway.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_takeaway.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/takeaways/<%= a_takeaway.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

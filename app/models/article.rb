@@ -14,7 +14,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  source_id   :integer
-#  summary_id  :integer
+#  takeaway_id :boolean
 #  user_id     :integer
 #
 class Article < ApplicationRecord
@@ -24,6 +24,6 @@ class Article < ApplicationRecord
 
   belongs_to(:user, counter_cache: true)
 
-  belongs_to(:summary)
+  belongs_to(:takeaway)
 
 end

@@ -9,12 +9,13 @@
 #  password_digest :string
 #  phone           :string
 #  private         :boolean
-#  summaries_count :integer
+#  takeaways_count :integer
 #  username        :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
 class User < ApplicationRecord
+  
   validates :email, :uniqueness => { :case_sensitive => false }
   validates :email, :presence => true
   validates :username, :uniqueness => { :case_sensitive => false }
@@ -22,6 +23,6 @@ class User < ApplicationRecord
 
   has_many(:articles)
 
-  has_many(:summaries)
+  has_many(:takeaways)
 
 end

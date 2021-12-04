@@ -25,6 +25,7 @@ class SummariesController < ApplicationController
     the_summary.public = params.fetch("query_public", false)
 
     if the_summary.valid?
+      
       the_summary.save
 
       matching_article = Article.where(id: the_summary.article_id).first
@@ -32,6 +33,7 @@ class SummariesController < ApplicationController
       
       matching_article.save
       redirect_to("/articles/#{the_summary.article_id}>", { :notice => "Summary created successfully." })
+
     else
       redirect_to("/articles/:path_id", { :notice => "Summary failed to create successfully." })
     end

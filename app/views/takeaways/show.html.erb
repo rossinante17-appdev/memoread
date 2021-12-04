@@ -1,0 +1,116 @@
+<div>
+  <div>
+    <h1>
+      Takeaway #<%= @the_takeaway.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/takeaways">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_takeaway/<%= @the_takeaway.id %>">
+          Delete takeaway
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Body
+      </dt>
+      <dd>
+        <%= @the_takeaway.body %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_takeaway.user_id %>
+      </dd>
+
+      <dt>
+        Article
+      </dt>
+      <dd>
+        <a href="/articles/<%= @the_article.id %>"><%= @the_article.headline %></a>
+      </dd>
+
+      <dt>
+        Public
+      </dt>
+      <dd>
+        <%= @the_takeaway.public %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_takeaway.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_takeaway.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit takeaway
+    </h2>
+
+    <form action="/modify_takeaway/<%= @the_takeaway.id %>"  method="post" >
+      <div>
+        <label for="body_box">
+          Body
+        </label>
+
+        <input type="text" id="body_box" name="query_body" value="<%= @the_takeaway.body %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_takeaway.user_id %>">
+      </div>
+
+      <div>
+        <label for="article_id_box">
+          Article
+        </label>
+
+        <input type="text" id="article_id_box" name="query_article_id" value="<%= @the_takeaway.article_id %>">
+      </div>
+
+      <div>
+        <input type="checkbox" id="public_box" name="query_public" value="1" <%= "checked" if @the_takeaway.public %>>
+
+        <label for="public_box">
+            Public
+        </label>
+      </div>
+
+      <button>
+        Update takeaway
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

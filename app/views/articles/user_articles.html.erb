@@ -40,14 +40,14 @@
 
           <% end %>
           
-          <% if an_article.Takeaway.present? %>
+          <% if an_article.takeaway.present? %>
           
-            <td><%= an_article.Takeaway.body %></td>
+            <td><%= an_article.takeaway.body %></td>
 
           <% else %>
 
             <%# add link or input functionality %>
-            <td>Add a Takeaway</td>
+            <td>Add a takeaway</td>
 
           <% end %>
 

@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_04_012409) do
+ActiveRecord::Schema.define(version: 2021_12_04_185830) do
 
   create_table "articles", force: :cascade do |t|
     t.string "url"
     t.string "headline"
-    t.integer "summary_id"
     t.integer "source_id"
     t.boolean "public"
     t.integer "user_id"
@@ -26,9 +25,10 @@ ActiveRecord::Schema.define(version: 2021_12_04_012409) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "read"
+    t.boolean "takeaway_id"
   end
 
-  create_table "summaries", force: :cascade do |t|
+  create_table "takeaways", force: :cascade do |t|
     t.string "body"
     t.integer "user_id"
     t.integer "article_id"
@@ -44,10 +44,10 @@ ActiveRecord::Schema.define(version: 2021_12_04_012409) do
     t.string "phone"
     t.boolean "private"
     t.integer "articles_count"
-    t.integer "summaries_count"
     t.integer "folders_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "takeaways_count"
   end
 
 end

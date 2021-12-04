@@ -21,26 +21,4 @@ class ApplicationController < ActionController::Base
 
   end
 
-  def twilio_test
-
-    twilio_sid = ENV.fetch("TWILIO_ACCOUNT_SID")
-    twilio_token = ENV.fetch("TWILIO_AUTH_TOKEN")
-    twilio_sending_number = ENV.fetch("TWILIO_SENDING_NUMBER")
-
-    twilio_client = Twilio::REST::Client.new(twilio_sid, twilio_token)
-
-    sms_parameters = {
-
-      from: twilio_sending_number,
-      to: "+16034996501",
-      body: "Test"
-
-    }
-
-    twilio_client.api.messages.create(sms_parameters)
-
-    redirect_to("/", notice: "Text sent")
-
-  end
-
 end
