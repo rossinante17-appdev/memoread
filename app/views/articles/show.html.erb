@@ -57,6 +57,19 @@
         <dd>
           <%= @the_article.created_at.strftime("%B %d, %Y") %>
         </dd>
+
+      <% if @the_article.read_at.present? %>
+        <dt>You started reading at</dt>
+          <dd><%= @the_article.read_at.strftime("%H:%M %p on %B %d, %Y") %></dd>
+      <% end %>
+
+      <% if @the_article.summary.present? %>
+
+        <dt>You committed this article to Memoread on</dt>
+          <dd><%= @the_article.summary.created_at.strftime("%B %d, %Y") %></dd>
+
+      <% end %>
+
     </dl>
   </div>
 </div>
@@ -88,9 +101,9 @@
 
   </div>
 
-<% end %>
+  <hr>
 
-<hr>
+<% end %>
 
 <div>
   <div>

@@ -70,6 +70,13 @@ Rails.application.routes.draw do
               
   #------------------------------
 
+  # Impression routes
+    
+      # LINK OUT
+      get("/link/:path_id", controller: "impressions", action: "link_out")
+
+  #------------------------------
+
   # Misc routes:
 
     get("/", controller: "application", action: "homepage")

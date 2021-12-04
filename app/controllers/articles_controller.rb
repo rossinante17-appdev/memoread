@@ -46,11 +46,13 @@ class ArticlesController < ApplicationController
 
           twilio_client = Twilio::REST::Client.new(twilio_sid, twilio_token)
 
+          link_out_url = "https://3000-amethyst-louse-bmphrzge.ws-us21.gitpod.io/link/#{the_article.id}"
+          
           sms_parameters = {
 
             from: twilio_sending_number,
             to: @current_user.phone,
-            body: "You requested this article from Memoread: #{the_article.headline} -- #{the_article.url}"
+            body: "You requested this article from Memoread: #{the_article.headline} -- #{link_out_url}"
 
           }
 
@@ -65,12 +67,14 @@ class ArticlesController < ApplicationController
             # Create an instance of the Mailgun Client and authenticate with AppDev key
             mg_client = Mailgun::Client.new(mg_api_key)
 
+            link_out_url = "https://3000-amethyst-louse-bmphrzge.ws-us21.gitpod.io/link/#{the_article.id}"
+
             # Craft email
             email_parameters =  { 
               :from => @current_user.email,
               :to => @current_user.email,
               :subject => "Memoread: #{the_article.headline}",
-              :text => "#{@current_user.username}, you requested this article from Memoread: #{the_article.headline} -- #{the_article.url}"
+              :text => "#{@current_user.username}, you requested this article from Memoread: #{the_article.headline} -- #{link_out_url}"
             }
 
             # Send it
@@ -99,12 +103,14 @@ class ArticlesController < ApplicationController
         # Create an instance of the Mailgun Client and authenticate with AppDev key
         mg_client = Mailgun::Client.new(mg_api_key)
 
+        link_out_url = "https://3000-amethyst-louse-bmphrzge.ws-us21.gitpod.io/link/#{the_article.id}"
+
         # Craft email
         email_parameters =  { 
           :from => @current_user.email,
           :to => @current_user.email,
           :subject => "Memoread: #{the_article.headline}",
-          :text => "#{@current_user.username}, you requested this article from Memoread: #{the_article.headline} -- #{the_article.url}"
+          :text => "#{@current_user.username}, you requested this article from Memoread: #{the_article.headline} -- #{link_out_url}"
         }
 
         # Send it
@@ -158,7 +164,7 @@ class ArticlesController < ApplicationController
     if its_summary.present?
       
       its_summary.destroy
-      
+
     end
 
     redirect_to("/my_articles", { :notice => "Article deleted successfully."} )
