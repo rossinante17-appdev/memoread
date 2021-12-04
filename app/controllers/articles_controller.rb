@@ -21,21 +21,19 @@ class ArticlesController < ApplicationController
     the_article = Article.new
     the_article.url = params.fetch("query_url")
     the_article.headline = params.fetch("query_headline")
-    the_article.summary_id = params.fetch("query_summary_id")
     the_article.source_id = params.fetch("query_source_id")
     the_article.public = params.fetch("query_public", false)
-    the_article.user_id = params.fetch("query_user_id")
-    the_article.unread_boolean = params.fetch("query_unread_boolean")
+    the_article.user_id = @current_user.id
+    the_article.read = params.fetch("query_read", false)
     the_article.email = params.fetch("query_email", false)
     the_article.text = params.fetch("query_text", false)
     the_article.reread_list = params.fetch("query_reread_list", false)
-    the_article.read_at = params.fetch("query_read_at")
 
     if the_article.valid?
       the_article.save
-      redirect_to("/articles", { :notice => "Article created successfully." })
+      redirect_to("/my_articles", { :notice => "Article created successfully." })
     else
-      redirect_to("/articles", { :notice => "Article failed to create successfully." })
+      redirect_to("/my_articles", { :notice => "Article failed to create successfully." })
     end
   end
 

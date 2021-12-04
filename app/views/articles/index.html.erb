@@ -24,7 +24,7 @@
     <tr>
 
       <td><img src="https://robohash.org/<%= an_article.id %>">
-      <td><a href="<%= an_article.url %>"><%= an_article.headline %></a></td>
+      <td><a href="<%= an_article.url %>" target="_blank"><%= an_article.headline %></a></td>
       <td>source placeholder</td>
       <% if an_article.read_at.present? %>
 
@@ -56,87 +56,51 @@
     <form action="/insert_article" method="post">
       <div>
         <label for="url_box">
-          Url
+          Article URL
         </label>
 
-        <input type="text" id="url_box" name="query_url">
+        <input type="text" id="url_box" name="query_url" placeholder="Copy and paste the URL here.">
       </div>
 
       <div>
-        <label for="headline_box">
-          Headline
-        </label>
+        
+        <label for="headline_box">Headline:</label>
+        <input type="text" id="headline_box" name="query_headline" placeholder="What do you want to call this article?">
 
-        <input type="text" id="headline_box" name="query_headline">
       </div>
 
       <div>
-        <label for="summary_id_box">
-          Summary
-        </label>
 
-        <input type="text" id="summary_id_box" name="query_summary_id">
+        <label for="source_id_box">Source</label>
+        <input type="text" id="source_id_box" name="query_source_id" placeholder="Ignore this for now.">
+
       </div>
 
       <div>
-        <label for="source_id_box">
-          Source
-        </label>
 
-        <input type="text" id="source_id_box" name="query_source_id">
+        <label for="read_box">Have you already read this article?</label>
+        <input type="checkbox" id="read_box" name="query_read" value="1">
+
       </div>
 
       <div>
-        <input type="checkbox" id="public_box" name="query_public" value="1">
 
-        <label for="public_box">Public</label>
-      </div>
-
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id">
-      </div>
-
-      <div>
-        <label for="unread_boolean_box">
-          Unread boolean
-        </label>
-
-        <input type="text" id="unread_boolean_box" name="query_unread_boolean">
-      </div>
-
-      <div>
+        <label for="email_box">Would you like Memoread to email you this article?</label>
         <input type="checkbox" id="email_box" name="query_email" value="1">
 
-        <label for="email_box">Email</label>
       </div>
 
       <div>
+
+        <label for="text_box">Would you like Memoread to text you this article?</label>
         <input type="checkbox" id="text_box" name="query_text" value="1">
-
-        <label for="text_box">Text</label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="reread_list_box" name="query_reread_list" value="1">
-
-        <label for="reread_list_box">Reread list</label>
-      </div>
-
-      <div>
-        <label for="read_at_box">
-          Read at
-        </label>
-
-        <input type="datetime-local" id="read_at_box" name="query_read_at">
+        
       </div>
 
       <button>
-        Create article
+        Add article
       </button>
+
     </form>
   </div>
 </div>
