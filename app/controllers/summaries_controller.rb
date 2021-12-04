@@ -20,15 +20,20 @@ class SummariesController < ApplicationController
   def create
     the_summary = Summary.new
     the_summary.body = params.fetch("query_body")
-    the_summary.user_id = params.fetch("query_user_id")
+    the_summary.user_id = @current_user.id
     the_summary.article_id = params.fetch("query_article_id")
     the_summary.public = params.fetch("query_public", false)
 
     if the_summary.valid?
       the_summary.save
-      redirect_to("/summaries", { :notice => "Summary created successfully." })
+
+      matching_article = Article.where(id: the_summary.article_id).first
+      matching_article.summary_id = the_summary.id
+      
+      matching_article.save
+      redirect_to("/articles/#{the_summary.article_id}>", { :notice => "Summary created successfully." })
     else
-      redirect_to("/summaries", { :notice => "Summary failed to create successfully." })
+      redirect_to("/articles/:path_id", { :notice => "Summary failed to create successfully." })
     end
   end
 

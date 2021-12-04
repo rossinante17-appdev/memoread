@@ -32,7 +32,7 @@
         </dd>
 
       
-      <% if @the_article.summary.present?%>
+      <% if @the_article.summary.present? %>
         
         <% the_summary = @the_article.summary %>
         
@@ -70,6 +70,24 @@
 
 <hr>
 
+
+<div>
+
+  <form action="/insert_summary" method="post">
+
+    <label for="body_box">What do you want to remember from this article?</label>
+    
+    <textarea id="body_box" name="query_body" placeholder="Type a quick summary here..."></textarea>
+
+    <input id="article_id" name="query_article_id" type="hidden" value="<%= @the_article.id %>">
+    
+    <button>Commit to memory</button>
+
+  </form>
+
+<div>
+
+<hr>
 
 <div>
   <div>
