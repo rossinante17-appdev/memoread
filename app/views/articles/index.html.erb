@@ -1,118 +1,122 @@
-<div>
-  
+<div class="container mt-3">
+
   <div>
-    <h1>
-      <%= @current_user.username %>'s articles
-    </h1>
+    
+    <div>
+      <h1>
+        <%= @current_user.username %>'s articles
+      </h1>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <table border="1">
+
+      <tr>
+        <th></th>
+        <th>Article</th>
+        <th>Source</th>
+        <th>Read?</th>
+        <th>Summary</th>
+        <th>Added on</th>
+      <tr>
+
+      <% @list_of_articles.each do |an_article| %>
+
+        <tr>
+
+          <td><img src="https://robohash.org/<%= an_article.id %>">
+          <td><a href="/articles/<%= an_article.id %>"><%= an_article.headline %></a> (<a href="<%= an_article.url %>" target="_blank">Link</a>)</td>
+          <td>source placeholder</td>
+          <% if an_article.read_at.present? %>
+
+            <td>Read</td>
+
+          <% else %>
+
+            <td>Unread</td>
+
+          <% end %>
+          
+          <% if an_article.summary.present? %>
+          
+            <td><%= an_article.summary.body %></td>
+
+          <% else %>
+
+            <%# add link or input functionality %>
+            <td>Add a summary</td>
+
+          <% end %>
+
+          <td><%= an_article.created_at.strftime("%B %d, %Y") %>
+
+        </tr>
+
+      <% end %>
+
+    </table>
+
+  </div>
+
+  <div>
+    <div class="card">
+      <h2>
+        Add a new article
+      </h2>
+
+      <form action="/insert_article" method="post">
+        <div>
+          <label for="url_box">
+            Article URL
+          </label>
+
+          <input type="text" id="url_box" name="query_url" placeholder="Copy and paste the URL here.">
+        </div>
+
+        <div>
+          
+          <label for="headline_box">Headline:</label>
+          <input type="text" id="headline_box" name="query_headline" placeholder="What do you want to call this article?">
+
+        </div>
+
+        <div>
+
+          <label for="source_id_box">Source</label>
+          <input type="text" id="source_id_box" name="query_source_id" placeholder="Ignore this for now.">
+
+        </div>
+
+        <div>
+
+          <label for="read_box">Have you already read this article?</label>
+          <input type="checkbox" id="read_box" name="query_read" value="1">
+
+        </div>
+
+        <div>
+
+          <label for="email_box">Would you like Memoread to email you this article?</label>
+          <input type="checkbox" id="email_box" name="query_email" value="1">
+
+        </div>
+
+        <div>
+
+          <label for="text_box">Would you like Memoread to text you this article?</label>
+          <input type="checkbox" id="text_box" name="query_text" value="1">
+          
+        </div>
+
+        <button>
+          Add article
+        </button>
+
+      </form>
+    </div>
   </div>
 
 </div>
-
-<table border="1">
-
-  <tr>
-    <th></th>
-    <th>Article</th>
-    <th>Source</th>
-    <th>Read?</th>
-    <th>Summary</th>
-    <th>Added on</th>
-  <tr>
-
-  <% @list_of_articles.each do |an_article| %>
-
-    <tr>
-
-      <td><img src="https://robohash.org/<%= an_article.id %>">
-      <td><a href="/articles/<%= an_article.id %>"><%= an_article.headline %></a> (<a href="<%= an_article.url %>" target="_blank">Link</a>)</td>
-      <td>source placeholder</td>
-      <% if an_article.read_at.present? %>
-
-        <td>Read</td>
-
-      <% else %>
-
-        <td>Unread</td>
-
-      <% end %>
-      
-      <% if an_article.summary.present? %>
-      
-        <td><%= an_article.summary.body %></td>
-
-      <% else %>
-
-        <%# add link or input functionality %>
-        <td>Add a summary</td>
-
-      <% end %>
-
-      <td><%= an_article.created_at.strftime("%B %d, %Y") %>
-
-    </tr>
-
-  <% end %>
-
-</table>
-
-<hr>
-
-<div>
-  <div>
-    <h2>
-      Add a new article
-    </h2>
-
-    <form action="/insert_article" method="post">
-      <div>
-        <label for="url_box">
-          Article URL
-        </label>
-
-        <input type="text" id="url_box" name="query_url" placeholder="Copy and paste the URL here.">
-      </div>
-
-      <div>
-        
-        <label for="headline_box">Headline:</label>
-        <input type="text" id="headline_box" name="query_headline" placeholder="What do you want to call this article?">
-
-      </div>
-
-      <div>
-
-        <label for="source_id_box">Source</label>
-        <input type="text" id="source_id_box" name="query_source_id" placeholder="Ignore this for now.">
-
-      </div>
-
-      <div>
-
-        <label for="read_box">Have you already read this article?</label>
-        <input type="checkbox" id="read_box" name="query_read" value="1">
-
-      </div>
-
-      <div>
-
-        <label for="email_box">Would you like Memoread to email you this article?</label>
-        <input type="checkbox" id="email_box" name="query_email" value="1">
-
-      </div>
-
-      <div>
-
-        <label for="text_box">Would you like Memoread to text you this article?</label>
-        <input type="checkbox" id="text_box" name="query_text" value="1">
-        
-      </div>
-
-      <button>
-        Add article
-      </button>
-
-    </form>
-  </div>
-</div>
-
-<hr>
