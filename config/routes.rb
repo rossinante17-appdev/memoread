@@ -1,5 +1,24 @@
 Rails.application.routes.draw do
 
+  # Routes for the Summary resource:
+
+    # CREATE
+    post("/insert_summary", { :controller => "summaries", :action => "create" })
+            
+    # READ
+    get("/summaries", { :controller => "summaries", :action => "index" })
+    
+    get("/summaries/:path_id", { :controller => "summaries", :action => "show" })
+    
+    # UPDATE
+    
+    post("/modify_summary/:path_id", { :controller => "summaries", :action => "update" })
+    
+    # DELETE
+    get("/delete_summary/:path_id", { :controller => "summaries", :action => "destroy" })             
+
+  #------------------------------
+
   # Routes for the Article resource:
 
     # CREATE

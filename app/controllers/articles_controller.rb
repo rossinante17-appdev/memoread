@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
+
     the_id = params.fetch("path_id")
 
     matching_articles = Article.where({ :id => the_id })
@@ -15,6 +16,7 @@ class ArticlesController < ApplicationController
     @the_article = matching_articles.at(0)
 
     render({ :template => "articles/show.html.erb" })
+
   end
 
   def create
@@ -67,6 +69,6 @@ class ArticlesController < ApplicationController
 
     the_article.destroy
 
-    redirect_to("/articles", { :notice => "Article deleted successfully."} )
+    redirect_to("/my_articles", { :notice => "Article deleted successfully."} )
   end
 end

@@ -24,7 +24,7 @@
     <tr>
 
       <td><img src="https://robohash.org/<%= an_article.id %>">
-      <td><a href="<%= an_article.url %>" target="_blank"><%= an_article.headline %></a></td>
+      <td><a href="/articles/<%= an_article.id %>"><%= an_article.headline %></a> (<a href="<%= an_article.url %>" target="_blank">Link</a>)</td>
       <td>source placeholder</td>
       <% if an_article.read_at.present? %>
 
