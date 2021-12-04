@@ -56,13 +56,61 @@ class ArticlesController < ApplicationController
 
           twilio_client.api.messages.create(sms_parameters)
 
-          redirect_to("/my_articles", notice: "Text sent")
+          if the_article.email == true           
+
+            # Retrieve AppDev Mailgun credentials
+            mg_api_key = ENV.fetch("MAILGUN_API_KEY")
+            mg_sending_domain = ENV.fetch("MAILGUN_SENDING_DOMAIN")
+
+            # Create an instance of the Mailgun Client and authenticate with AppDev key
+            mg_client = Mailgun::Client.new(mg_api_key)
+
+            # Craft email
+            email_parameters =  { 
+              :from => @current_user.email,
+              :to => @current_user.email,
+              :subject => "Memoread: #{the_article.headline}",
+              :text => "#{@current_user.username}, you requested this article from Memoread: #{the_article.headline} -- #{the_article.url}"
+            }
+
+            # Send it
+            mg_client.send_message(mg_sending_domain, email_parameters)
+
+            redirect_to("/my_articles", notice: "Text and email sent.")
+
+          else
+
+            redirect_to("/my_articles", notice: "Text sent.")
+
+          end
 
         else
 
           redirect_to("/my_articles", notice: "Can't text an article without a phone number on file.")
 
         end
+
+      elsif the_article.email == true
+
+        # Retrieve AppDev Mailgun credentials
+        mg_api_key = ENV.fetch("MAILGUN_API_KEY")
+        mg_sending_domain = ENV.fetch("MAILGUN_SENDING_DOMAIN")
+
+        # Create an instance of the Mailgun Client and authenticate with AppDev key
+        mg_client = Mailgun::Client.new(mg_api_key)
+
+        # Craft email
+        email_parameters =  { 
+          :from => @current_user.email,
+          :to => @current_user.email,
+          :subject => "Memoread: #{the_article.headline}",
+          :text => "#{@current_user.username}, you requested this article from Memoread: #{the_article.headline} -- #{the_article.url}"
+        }
+
+        # Send it
+        mg_client.send_message(mg_sending_domain, email_parameters)
+
+        redirect_to("/my_articles", notice: "Email sent.")
 
       else
 
@@ -73,28 +121,6 @@ class ArticlesController < ApplicationController
     else
       redirect_to("/my_articles", { :notice => "Article failed to create successfully." })
     end
-  end
-
-  def send_text
-
-    twilio_sid = ENV.fetch("TWILIO_ACCOUNT_SID")
-    twilio_token = ENV.fetch("TWILIO_AUTH_TOKEN")
-    twilio_sending_number = ENV.fetch("TWILIO_SENDING_NUMBER")
-
-    twilio_client = Twilio::REST::Client.new(twilio_sid, twilio_token)
-
-    sms_parameters = {
-      
-      :from => twilio_sending_number,
-      :to => @current_user.phone,
-      :body => @article_to_text.id
-
-    }
-
-    twilio_client.api.account.messages.create(sms_parameters)
-
-    redirect_to("/my_articles", notice: "Article successfully created and texted.")
-
   end
 
   def update
@@ -128,7 +154,12 @@ class ArticlesController < ApplicationController
     its_summary = the_article.summary
 
     the_article.destroy
-    its_summary.destroy
+    
+    if its_summary.present?
+      
+      its_summary.destroy
+      
+    end
 
     redirect_to("/my_articles", { :notice => "Article deleted successfully."} )
   end
