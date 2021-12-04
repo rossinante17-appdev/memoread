@@ -23,7 +23,6 @@ GIT
       actionview
       diffy
       git
-      sinatra
       tzinfo-data
 
 GEM
@@ -319,11 +318,6 @@ GEM
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
-    sinatra (2.0.8.1)
-      mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.8.1)
-      tilt (~> 2.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -402,7 +396,6 @@ DEPENDENCIES
   rspec-html-matchers
   rspec-rails
   sassc-rails
-  sinatra
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets (< 4)
