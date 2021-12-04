@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get("/test", controller: "application", action: "twilio_test")
+
   # Routes for the Summary resource:
 
     # CREATE
@@ -35,6 +37,9 @@ Rails.application.routes.draw do
     
     # DELETE
     get("/delete_article/:path_id", { :controller => "articles", :action => "destroy" })
+
+    # Text the article
+    get("/text_article", controller: "articles", :action => "send_text")
 
   #------------------------------
 

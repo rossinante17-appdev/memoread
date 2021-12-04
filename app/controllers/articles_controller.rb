@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+ 
   def index
     matching_articles = @current_user.articles
 
@@ -20,6 +21,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    
     the_article = Article.new
     the_article.url = params.fetch("query_url")
     the_article.headline = params.fetch("query_headline")
@@ -33,10 +35,66 @@ class ArticlesController < ApplicationController
 
     if the_article.valid?
       the_article.save
-      redirect_to("/my_articles", { :notice => "Article created successfully." })
+
+      if the_article.text == true
+
+        if the_article.user.phone.present?
+
+          twilio_sid = ENV.fetch("TWILIO_ACCOUNT_SID")
+          twilio_token = ENV.fetch("TWILIO_AUTH_TOKEN")
+          twilio_sending_number = ENV.fetch("TWILIO_SENDING_NUMBER")
+
+          twilio_client = Twilio::REST::Client.new(twilio_sid, twilio_token)
+
+          sms_parameters = {
+
+            from: twilio_sending_number,
+            to: @current_user.phone,
+            body: "You requested this article from Memoread: #{the_article.headline} -- #{the_article.url}"
+
+          }
+
+          twilio_client.api.messages.create(sms_parameters)
+
+          redirect_to("/my_articles", notice: "Text sent")
+
+        else
+
+          redirect_to("/my_articles", notice: "Can't text an article without a phone number on file.")
+
+        end
+
+      else
+
+        redirect_to("/my_articles", { :notice => "Article created successfully." })
+
+      end
+
     else
       redirect_to("/my_articles", { :notice => "Article failed to create successfully." })
     end
+  end
+
+  def send_text
+
+    twilio_sid = ENV.fetch("TWILIO_ACCOUNT_SID")
+    twilio_token = ENV.fetch("TWILIO_AUTH_TOKEN")
+    twilio_sending_number = ENV.fetch("TWILIO_SENDING_NUMBER")
+
+    twilio_client = Twilio::REST::Client.new(twilio_sid, twilio_token)
+
+    sms_parameters = {
+      
+      :from => twilio_sending_number,
+      :to => @current_user.phone,
+      :body => @article_to_text.id
+
+    }
+
+    twilio_client.api.account.messages.create(sms_parameters)
+
+    redirect_to("/my_articles", notice: "Article successfully created and texted.")
+
   end
 
   def update
@@ -67,7 +125,10 @@ class ArticlesController < ApplicationController
     the_id = params.fetch("path_id")
     the_article = Article.where({ :id => the_id }).at(0)
 
+    its_summary = the_article.summary
+
     the_article.destroy
+    its_summary.destroy
 
     redirect_to("/my_articles", { :notice => "Article deleted successfully."} )
   end

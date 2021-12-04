@@ -15,8 +15,8 @@ class Summary < ApplicationRecord
   validates(:user_id, presence: true)
   validates(:article_id, presence: true)
 
-  belongs_to(:user)
+  belongs_to(:user, required: true, counter_cache: true)
 
-  belongs_to(:article)
+  belongs_to(:article, required: true)
 
 end
