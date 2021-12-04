@@ -77,6 +77,9 @@ Rails.application.routes.draw do
       # LINK OUT
       get("/link/:path_id", controller: "impressions", action: "link_out")
 
+      # RECEIVE
+      post("/inbound_text", controller: "impressions", action: "receive_text")
+
   #------------------------------
 
   # Misc routes:

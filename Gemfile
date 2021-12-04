@@ -16,6 +16,9 @@ gem 'sassc-rails'
 # add Mailgun API to send emails
 gem "mailgun-ruby"
 
+# add Sinatra DSL API to receive texts
+gem "sinatra"
+
 # add Twilio API to send texts
 gem "twilio-ruby"
 

@@ -402,6 +402,7 @@ DEPENDENCIES
   rspec-html-matchers
   rspec-rails
   sassc-rails
+  sinatra
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets (< 4)
