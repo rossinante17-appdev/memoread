@@ -22,11 +22,6 @@ class ImpressionsController < ApplicationController
 
     the_takeaway = params.fetch("Body")
 
-    
-
-
-    return "Success?"
-
   end
 
 end
