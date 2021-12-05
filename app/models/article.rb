@@ -5,6 +5,7 @@
 #  id          :integer          not null, primary key
 #  email       :boolean
 #  headline    :string
+#  opened_at   :datetime
 #  public      :boolean
 #  read        :boolean
 #  read_at     :datetime
