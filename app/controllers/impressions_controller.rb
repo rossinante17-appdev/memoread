@@ -22,6 +22,8 @@ class ImpressionsController < ApplicationController
 
     the_takeaway = params.fetch("Body")
 
+    return the_takeaway
+
   end
 
 end
