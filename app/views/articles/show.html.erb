@@ -32,15 +32,15 @@
         </dd>
 
       
-      <% if @the_article.summary.present? %>
+      <% if @the_article.takeaway.present? %>
         
-        <% the_summary = @the_article.summary %>
+        <% the_takeaway = @the_article.takeaway %>
         
         <dt>
-          Summary
+          takeaway
         </dt>       
 
-          <dd><%= the_summary.body %></dd>
+          <dd><%= the_takeaway.body %></dd>
 
       <% end %>
 
@@ -63,10 +63,10 @@
           <dd><%= @the_article.read_at.strftime("%H:%M %p on %B %d, %Y") %></dd>
       <% end %>
 
-      <% if @the_article.summary.present? %>
+      <% if @the_article.takeaway.present? %>
 
         <dt>You committed this article to Memoread on</dt>
-          <dd><%= @the_article.summary.created_at.strftime("%B %d, %Y") %></dd>
+          <dd><%= @the_article.takeaway.created_at.strftime("%B %d, %Y") %></dd>
 
       <% end %>
 
@@ -77,11 +77,11 @@
 <hr>
 
 
-<% unless @the_article.summary.present? %>
+<% unless @the_article.takeaway.present? %>
 
   <div>
 
-    <form action="/insert_summary" method="post">
+    <form action="/insert_takeaway" method="post">
 
       <input id="article_id" name="query_article_id" type="hidden" value="<%= @the_article.id %>">
 
@@ -90,7 +90,7 @@
       </div>
 
       <div class="form-group">
-        <textarea id="body_box" name="query_body" placeholder="Type a quick summary here..."></textarea>
+        <textarea id="body_box" name="query_body" placeholder="Type a quick takeaway here..."></textarea>
       </div>
       
       <div class="button-submit">
@@ -129,11 +129,11 @@
       </div>
 
       <div>
-        <label for="summary_id_box">
-          Summary
+        <label for="takeaway_id_box">
+          takeaway
         </label>
 
-        <input type="text" id="summary_id_box" name="query_summary_id" value="<%= @the_article.summary_id %>">
+        <input type="text" id="takeaway_id_box" name="query_takeaway_id" value="<%= @the_article.takeaway_id %>">
       </div>
 
       <div>

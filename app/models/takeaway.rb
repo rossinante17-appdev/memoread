@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: summaries
+# Table name: takeaways
 #
 #  id         :integer          not null, primary key
 #  body       :string
@@ -10,7 +10,8 @@
 #  article_id :integer
 #  user_id    :integer
 #
-class Summary < ApplicationRecord
+class Takeaway < ApplicationRecord
+
   validates(:body, presence: true)
   validates(:user_id, presence: true)
   validates(:article_id, presence: true)
@@ -18,5 +19,5 @@ class Summary < ApplicationRecord
   belongs_to(:user, required: true, counter_cache: true)
 
   belongs_to(:article, required: true)
-
+  
 end

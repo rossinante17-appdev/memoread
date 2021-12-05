@@ -71,7 +71,7 @@ class UserAuthenticationController < ApplicationController
     @user.phone = params.fetch("query_phone")
     @user.private = params.fetch("query_private", false)
     @user.articles_count = params.fetch("query_articles_count")
-    @user.summaries_count = params.fetch("query_summaries_count")
+    @user.takeaways_count = params.fetch("query_takeaways_count")
     @user.folders_count = params.fetch("query_folders_count")
     
     if @user.valid?

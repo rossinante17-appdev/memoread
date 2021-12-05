@@ -1,11 +1,11 @@
 class ArticlesController < ApplicationController
- 
-  def index
+  
+  def user_articles
     matching_articles = @current_user.articles
 
     @list_of_articles = matching_articles.order({ :created_at => :desc })
 
-    render({ :template => "articles/index.html.erb" })
+    render({ :template => "articles/user_articles.html.erb" })
   end
 
   def show
@@ -20,6 +20,7 @@ class ArticlesController < ApplicationController
 
   end
 
+  # Create article, with text and email -> maybe break these out?
   def create
     
     the_article = Article.new
@@ -135,7 +136,7 @@ class ArticlesController < ApplicationController
 
     the_article.url = params.fetch("query_url")
     the_article.headline = params.fetch("query_headline")
-    the_article.summary_id = params.fetch("query_summary_id")
+    the_article.takeaway_id = params.fetch("query_takeaway_id")
     the_article.source_id = params.fetch("query_source_id")
     the_article.public = params.fetch("query_public", false)
     the_article.user_id = params.fetch("query_user_id")
@@ -157,13 +158,13 @@ class ArticlesController < ApplicationController
     the_id = params.fetch("path_id")
     the_article = Article.where({ :id => the_id }).at(0)
 
-    its_summary = the_article.summary
+    its_takeaway = the_article.takeaway
 
     the_article.destroy
     
-    if its_summary.present?
+    if its_takeaway.present?
       
-      its_summary.destroy
+      its_takeaway.destroy
 
     end
 

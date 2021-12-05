@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of all summaries
+      List of all takeaways
     </h1>
   </div>
 </div>
@@ -11,10 +11,10 @@
 <div>
   <div>
     <h2>
-      Add a new summary
+      Add a new takeaway
     </h2>
 
-    <form action="/insert_summary" method="post">
+    <form action="/insert_takeaway" method="post">
       <div>
         <label for="body_box">
           Body
@@ -46,7 +46,7 @@
       </div>
 
       <button>
-        Create summary
+        Create takeaway
       </button>
     </form>
   </div>
@@ -89,37 +89,37 @@
         </th>
       </tr>
 
-      <% @list_of_summaries.each do |a_summary| %>
+      <% @list_of_takeaways.each do |a_takeaway| %>
       <tr>
         <td>
-          <%= a_summary.id %>
+          <%= a_takeaway.id %>
         </td>
 
         <td>
-          <%= a_summary.body %>
+          <%= a_takeaway.body %>
         </td>
 
         <td>
-          <%= a_summary.user_id %>
+          <%= a_takeaway.user_id %>
         </td>
 
         <td>
-          <%= a_summary.article_id %>
+          <%= a_takeaway.article_id %>
         </td>
 
         <td>
-          <%= a_summary.public %>
+          <%= a_takeaway.public %>
         </td>
 
         <td>
-          <%= time_ago_in_words(a_summary.created_at) %> ago
+          <%= time_ago_in_words(a_takeaway.created_at) %> ago
         </td>
         <td>
-          <%= time_ago_in_words(a_summary.updated_at) %> ago
+          <%= time_ago_in_words(a_takeaway.updated_at) %> ago
         </td>
 
         <td>
-          <a href="/summaries/<%= a_summary.id %>">
+          <a href="/takeaways/<%= a_takeaway.id %>">
             Show details
           </a>
         </td>

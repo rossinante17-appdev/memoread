@@ -29,6 +29,7 @@
     
     <%= stylesheet_link_tag 'application', media: 'all' %>    
 
+    <%# this doesn't seem to be working %>
     <link rel="stylesheet" href="/memoread_style.css">
 
   </head>
@@ -48,11 +49,11 @@
       <% if @current_user.present? %>
 
         <li class="nav-item">
-          <a class="nav-link" href="/my_articles">My articles</a>
+          <a class="nav-link" href="/my_articles">My Articles</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="/summaries">My summaries</a>
+          <a class="nav-link" href="/my_takeaways">My Takeaways</a>
         </li>
 
         <li class="nav-item">
