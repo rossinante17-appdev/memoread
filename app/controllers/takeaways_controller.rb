@@ -18,6 +18,13 @@ class TakeawaysController < ApplicationController
     
   end
 
+  def takeaway_form
+
+    render(template: "/takeaways/create_form.html.erb")
+
+  end
+  
+  
   def show
 
     the_id = params.fetch("path_id")

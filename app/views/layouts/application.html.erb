@@ -29,8 +29,8 @@
     
     <%= stylesheet_link_tag 'application', media: 'all' %>    
 
-    <%# this doesn't seem to be working %>
-    <link rel="stylesheet" href="/memoread_style.css">
+    <!-- this doesn't seem to be working -->
+    <%# <link rel="stylesheet" href="/memoread_style.css"> %>
 
   </head>
 
@@ -84,7 +84,9 @@
 
     <% if alert.present? %>
 
-      <span><%= alert %></span>
+      <div class="alert alert-success" role="alert">
+        <%= alert %>
+      </div>
 
     <% end %>
 

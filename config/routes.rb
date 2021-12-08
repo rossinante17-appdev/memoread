@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   # Routes for the Takeaway resource:
 
-    # CREATE
+  # NEW TAKEAWAY FORM
+  get("/new_takeaway", controller: "takeaways", action: "takeaway_form")  
+  
+  # CREATE
     post("/insert_takeaway", { :controller => "takeaways", :action => "create" })
             
     # READ
