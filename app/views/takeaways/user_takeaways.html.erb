@@ -1,8 +1,52 @@
 <div>
   <div>
     <h1>
-      List of all takeaways
+      My Memory
     </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <table>
+      <tr>        
+        <th>Article</th>
+
+        <th>Takeaway</th>
+
+        <th>Read</th>
+
+        <th>Committed</th>
+
+        <th>Remembered</th>
+      </tr>
+
+      <% @list_of_takeaways.each do |a_takeaway| %>
+      <tr>
+        <td><%= a_takeaway.body %></td>
+
+        <td><%= a_takeaway.article.headline %></td>
+
+        <% if a_takeaway.article.read == true %>
+          
+          <td><%= time_ago_in_words(a_takeaway.created_at) %> ago</td>
+        
+        <% else %>
+        
+          <td></td>
+        
+        <% end %>
+
+        <td><%= time_ago_in_words(a_takeaway.created_at) %> ago</td>
+
+        <td><%= time_ago_in_words(a_takeaway.updated_at) %> ago</td>
+
+        <td><a href="/takeaways/<%= a_takeaway.id %>">Show details</a></td>
+      </tr>
+      <% end %>
+    </table>
   </div>
 </div>
 
@@ -51,82 +95,3 @@
     </form>
   </div>
 </div>
-
-<hr>
-<div>
-  <div>
-    <table>
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Body
-        </th>
-
-        <th>
-          User
-        </th>
-
-        <th>
-          Article
-        </th>
-
-        <th>
-          Public
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_takeaways.each do |a_takeaway| %>
-      <tr>
-        <td>
-          <%= a_takeaway.id %>
-        </td>
-
-        <td>
-          <%= a_takeaway.body %>
-        </td>
-
-        <td>
-          <%= a_takeaway.user_id %>
-        </td>
-
-        <td>
-          <%= a_takeaway.article_id %>
-        </td>
-
-        <td>
-          <%= a_takeaway.public %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_takeaway.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_takeaway.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/takeaways/<%= a_takeaway.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-
-<hr>

@@ -1,6 +1,6 @@
 class ImpressionsController < ApplicationController
 
-  skip_before_action(:force_user_sign_in, only: [:receive_text])
+  skip_before_action(:force_user_sign_in, only: [:link_out, :receive_text])
 
   # Link Out: when the link Memoread sends is used to access an article
   def link_out
@@ -9,7 +9,7 @@ class ImpressionsController < ApplicationController
 
     the_article = Article.where(id: article_id).first
 
-    the_article.read_at = DateTime.now
+    the_article.opened_at = DateTime.now
 
     the_article.save
 

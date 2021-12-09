@@ -53,7 +53,11 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="/my_takeaways">My Takeaways</a>
+          <a class="nav-link" href="/my_takeaways">My Memory</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/new_takeaway">Add Takeaway</a>
         </li>
 
         <li class="nav-item">
@@ -76,7 +80,7 @@
 
     <% if notice.present? %>
 
-      <div>
+      <div class="alert alert-success" role="alert">>
         <span><%= notice %></span>
       </div>
 
@@ -84,7 +88,7 @@
 
     <% if alert.present? %>
 
-      <div class="alert alert-success" role="alert">
+      <div class="alert alert-danger" role="alert">
         <%= alert %>
       </div>
 

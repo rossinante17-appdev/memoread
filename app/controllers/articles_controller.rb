@@ -31,71 +31,39 @@ class ArticlesController < ApplicationController
     the_article.user_id = @current_user.id
     the_article.read = params.fetch("query_read", false)
     the_article.email = params.fetch("query_email", false)
-    the_article.text = params.fetch("query_text", false)
+    the_article.text = params.fetch("query_text", false)    
     the_article.reread_list = params.fetch("query_reread_list", false)
 
+
     if the_article.valid?
+      
       the_article.save
 
+      # Check to see if User wanted the article texted to them
       if the_article.text == true
 
-        if the_article.user.phone.present?
+        twilio_sid = ENV.fetch("TWILIO_ACCOUNT_SID")
+        twilio_token = ENV.fetch("TWILIO_AUTH_TOKEN")
+        twilio_sending_number = ENV.fetch("TWILIO_SENDING_NUMBER")
 
-          twilio_sid = ENV.fetch("TWILIO_ACCOUNT_SID")
-          twilio_token = ENV.fetch("TWILIO_AUTH_TOKEN")
-          twilio_sending_number = ENV.fetch("TWILIO_SENDING_NUMBER")
+        twilio_client = Twilio::REST::Client.new(twilio_sid, twilio_token)
 
-          twilio_client = Twilio::REST::Client.new(twilio_sid, twilio_token)
+        link_out_url = "https://3000-amethyst-louse-bmphrzge.ws-us21.gitpod.io/link/#{the_article.id}"
+        
+        sms_parameters = {
 
-          link_out_url = "https://3000-amethyst-louse-bmphrzge.ws-us21.gitpod.io/link/#{the_article.id}"
-          
-          sms_parameters = {
+          from: twilio_sending_number,
+          to: @current_user.phone,
+          body: "You requested this article from Memoread: #{the_article.headline} -- #{link_out_url}"
 
-            from: twilio_sending_number,
-            to: @current_user.phone,
-            body: "You requested this article from Memoread: #{the_article.headline} -- #{link_out_url}"
+        }
 
-          }
+        twilio_client.api.messages.create(sms_parameters)
 
-          twilio_client.api.messages.create(sms_parameters)
+      end
 
-          if the_article.email == true           
-
-            # Retrieve AppDev Mailgun credentials
-            mg_api_key = ENV.fetch("MAILGUN_API_KEY")
-            mg_sending_domain = ENV.fetch("MAILGUN_SENDING_DOMAIN")
-
-            # Create an instance of the Mailgun Client and authenticate with AppDev key
-            mg_client = Mailgun::Client.new(mg_api_key)
-
-            link_out_url = "https://3000-amethyst-louse-bmphrzge.ws-us21.gitpod.io/link/#{the_article.id}"
-
-            # Craft email
-            email_parameters =  { 
-              :from => @current_user.email,
-              :to => @current_user.email,
-              :subject => "Memoread: #{the_article.headline}",
-              :text => "#{@current_user.username}, you requested this article from Memoread: #{the_article.headline} -- #{link_out_url}"
-            }
-
-            # Send it
-            mg_client.send_message(mg_sending_domain, email_parameters)
-
-            redirect_to("/my_articles", notice: "Text and email sent.")
-
-          else
-
-            redirect_to("/my_articles", notice: "Text sent.")
-
-          end
-
-        else
-
-          redirect_to("/my_articles", notice: "Can't text an article without a phone number on file.")
-
-        end
-
-      elsif the_article.email == true
+      # Check to see if User wanted the article emailed to them
+      if the_article.email == true           
 
         # Retrieve AppDev Mailgun credentials
         mg_api_key = ENV.fetch("MAILGUN_API_KEY")
@@ -117,17 +85,33 @@ class ArticlesController < ApplicationController
         # Send it
         mg_client.send_message(mg_sending_domain, email_parameters)
 
-        redirect_to("/my_articles", notice: "Email sent.")
+      end
+
+      # Redirect
+      if the_article.email == true && the_article.text == true
+
+        redirect_to("/my_articles", { :notice => "Article added; text and email sent." })
+
+      elsif the_article.email == true && the_article.text == false
+        
+        redirect_to("/my_articles", notice: "Article added; email sent.")
+
+      elsif the_article.text == true && the_article.email == false
+
+        redirect_to("/my_articles", notice: "Article added; text sent.")
 
       else
 
-        redirect_to("/my_articles", { :notice => "Article created successfully." })
+        redirect_to("/my_articles", notice: "Article added.")
 
       end
 
     else
-      redirect_to("/my_articles", { :notice => "Article failed to create successfully." })
+
+      redirect_to("/my_articles", { :alert => "Article failed to create successfully." })
+
     end
+
   end
 
   def update
@@ -147,8 +131,11 @@ class ArticlesController < ApplicationController
     the_article.read_at = params.fetch("query_read_at")
 
     if the_article.valid?
+      
       the_article.save
+
       redirect_to("/articles/#{the_article.id}", { :notice => "Article updated successfully."} )
+
     else
       redirect_to("/articles/#{the_article.id}", { :alert => "Article failed to update successfully." })
     end
@@ -168,6 +155,7 @@ class ArticlesController < ApplicationController
 
     end
 
-    redirect_to("/my_articles", { :notice => "Article deleted successfully."} )
+    redirect_to("/my_articles", { :alert => "Article deleted."} )
+    
   end
 end

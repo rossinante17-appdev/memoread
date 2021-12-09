@@ -20,6 +20,16 @@ class TakeawaysController < ApplicationController
 
   def takeaway_form
 
+    @user_articles = @current_user.articles
+
+    if params.fetch("query_article_id").present?
+
+      the_id = params.fetch("query_article_id")
+      
+      @matching_article = Article.where(id: the_id).first
+
+    end
+     
     render(template: "/takeaways/create_form.html.erb")
 
   end
@@ -49,9 +59,9 @@ class TakeawaysController < ApplicationController
 
     if the_takeaway.valid?
       the_takeaway.save
-      redirect_to("/takeaways", { :notice => "Takeaway created successfully." })
+      redirect_to("/my_takeaways", { :notice => "Takeaway created successfully." })
     else
-      redirect_to("/takeaways", { :notice => "Takeaway failed to create successfully." })
+      redirect_to("/new_takeaway", { :alert => "Takeaway failed to create successfully." })
     end
   end
 
@@ -66,9 +76,19 @@ class TakeawaysController < ApplicationController
 
     if the_takeaway.valid?
       the_takeaway.save
+
+      if the_takeaway.article.read == false
+
+        the_takeaway.article.read = true
+
+      end
+
       redirect_to("/takeaways/#{the_takeaway.id}", { :notice => "Takeaway updated successfully."} )
+
     else
+
       redirect_to("/takeaways/#{the_takeaway.id}", { :alert => "Takeaway failed to update successfully." })
+
     end
   end
 
@@ -78,6 +98,6 @@ class TakeawaysController < ApplicationController
 
     the_takeaway.destroy
 
-    redirect_to("/takeaways", { :notice => "Takeaway deleted successfully."} )
+    redirect_to("/takeaways", { :alert => "Takeaway deleted."} )
   end
 end

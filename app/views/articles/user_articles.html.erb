@@ -104,12 +104,16 @@
 
         </div>
 
-        <div>
+        <% if @current_user.phone.present? %>
+        
+          <div>
 
-          <label for="text_box">Would you like Memoread to text you this article?</label>
-          <input type="checkbox" id="text_box" name="query_text" value="1">
-          
-        </div>
+            <label for="text_box">Would you like Memoread to text you this article?</label>
+            <input type="checkbox" id="text_box" name="query_text" value="1">
+            
+          </div>
+
+        <% end %>
 
         <button>
           Add article

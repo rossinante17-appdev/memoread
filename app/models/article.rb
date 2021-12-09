@@ -21,7 +21,6 @@
 class Article < ApplicationRecord
 
   validates :url, presence: true
-  validates :url, :uniqueness => { :case_sensitive => false }
 
   belongs_to(:user, counter_cache: true)
 
