@@ -1,1 +1,109 @@
 <h1>Memoread</h1>
+
+<div>  
+
+  <div class="container-fluid">
+
+    <div class="row text-center">
+    
+      <div class="col-md-12">
+      
+        <h2>Things to Read<h2>
+
+      </div>
+
+    </div>
+
+    <div class="row text-center">
+
+      <div class="col-md-6 offset-md-3">
+      
+        <span>Article</span>
+      
+      </div>
+
+    </div>
+
+    <% @things_to_read.each do |an_article| %>
+    
+      <% if an_article.present? %>
+      
+        <div class="row text-center">
+
+          <a href="/link/<%= an_article.id %>">
+          
+            <span><%= an_article.headline %></span>
+            
+          </a>
+
+        </div>
+      
+      <% end %>
+
+    <% end %>
+
+  </div>
+
+  <div class="container-fluid">
+
+    <div class="row text-center">
+    
+      <div class="col-md-12">
+      
+        <h2>Things I've Learned<h2>
+
+      </div>
+
+    </div>
+
+    <div class="row text-center">
+
+      <div class="col-md-3 offset-md-3">
+      
+        <span>Article</span>
+      
+      </div>
+
+      <div class="col-md-3 offset-md-3">
+      
+        <span>Takeaway</span>
+      
+      </div>
+
+    </div>
+
+    <% @things_ive_learned.each do |a_takeaway| %>
+    
+      <% if a_takeaway.present? %>
+      
+        <div class="row text-center">
+
+          <div class="col-md-3 offset-md-3">
+          
+            <a href="/articles/<%= a_takeaway.article_id %>">
+            
+              <span><%= a_takeaway.article.headline %></span>
+              
+            </a>
+
+          </div>
+
+          <div class="col-md-3 offset-md-3">
+          
+            <a>
+            
+              <span><%= a_takeaway.body %></span>
+              
+            </a>
+
+          </div>
+
+        </div>
+      
+      <% end %>
+
+    <% end %>
+
+  </div>
+
+</div>
