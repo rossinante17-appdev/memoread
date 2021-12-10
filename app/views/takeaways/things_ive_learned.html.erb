@@ -19,7 +19,7 @@
         <tr>
         
           <td><%= a_takeaway.body %></td>
-          <td><%= a_takeaway.article.headline %></td>
+          <td><a href="/articles/<%= a_takeaway.article.id %>"><%= a_takeaway.article.headline %></a></td>
           <td><%= time_ago_in_words(a_takeaway.created_at) %></td>
         
         </tr>

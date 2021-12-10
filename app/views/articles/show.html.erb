@@ -1,9 +1,15 @@
 <div>
   <div>
       <div>
-        <a href="/my_articles">
-          Go back
-        </a>
+        <% if @the_article.read == true %>        
+          <a href="/things_ive_read">
+            Go back
+          </a>
+        <% else %>
+          <a href="/things_to_read">
+            Go back
+          </a>
+        <% end %>
       </div>
     
     <h1>
@@ -32,15 +38,10 @@
         </dd>
 
       
-      <% if @the_article.takeaway.present? %>
+      <% if @its_takeaway.present? %>
         
-        <% the_takeaway = @the_article.takeaway %>
-        
-        <dt>
-          Takeaway
-        </dt>       
-
-          <dd><%= the_takeaway.body %></dd>
+        <dt>Takeaway</dt>
+          <dd><%= @its_takeaway.body %></dd>
 
       <% end %>
 
@@ -58,15 +59,10 @@
           <%= @the_article.created_at.strftime("%B %d, %Y") %>
         </dd>
 
-      <% if @the_article.read_at.present? %>
-        <dt>You started reading at</dt>
-          <dd><%= @the_article.read_at.strftime("%H:%M %p on %B %d, %Y") %></dd>
-      <% end %>
-
-      <% if @the_article.takeaway.present? %>
+      <% if @its_takeaway.present? %>
 
         <dt>You committed this article to Memoread on</dt>
-          <dd><%= @the_article.takeaway.created_at.strftime("%B %d, %Y") %></dd>
+          <dd><%= @its_takeaway.created_at.strftime("%B %d, %Y") %></dd>
 
       <% end %>
 
@@ -77,7 +73,9 @@
 <hr>
 
 
-<% unless @the_article.takeaway.present? %>
+<% if @its_takeaway.present? %>
+
+<% else %>
 
   <div>
 
@@ -85,7 +83,7 @@
 
       <input id="article_id" name="query_article_id" type="hidden" value="<%= @the_article.id %>">
 
-      <div>
+      <div> 
       
         <div class="form-group">
           <label for="body_box">What do you want to remember from this article?</label>

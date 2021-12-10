@@ -8,7 +8,7 @@ class TakeawaysController < ApplicationController
     render({ :template => "takeaways/index.html.erb" })
   end
 
-  def user_takeaways
+  def things_ive_learned
     
     matching_takeaways = @current_user.takeaways
 
@@ -24,7 +24,7 @@ class TakeawaysController < ApplicationController
 
     end
 
-    render({ :template => "takeaways/user_takeaways_fix.html.erb" })
+    render({ :template => "takeaways/things_ive_learned.html.erb" })
     
   end
 
@@ -61,6 +61,21 @@ class TakeawaysController < ApplicationController
 
     if the_takeaway.valid?
       the_takeaway.save
+
+      the_article = Article.where(id: the_takeaway.article_id).first
+
+      the_article.takeaway_id = the_takeaway.id
+
+      if the_article.read == false
+
+        the_article.read = true
+
+        the_article.read_at = DateTime.now
+
+      end
+
+      the_article.save
+      
       redirect_to("/my_takeaways", { :notice => "Takeaway created successfully." })
     else
       redirect_to("/new_takeaway", { :alert => "Takeaway failed to create successfully." })

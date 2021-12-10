@@ -20,16 +20,16 @@
           <th></th>
           <th>Article</th>
           <th>Takeaway</th>
-          <th>Added</th>
+          <th>Read on</th>
           <th></th>
         <tr>
 
-        <% @unread_articles.each do |an_article| %>
+        <% @read_articles.each do |an_article| %>
 
           <tr>
 
             <td><img src="https://robohash.org/<%= an_article.id %>" height=125 width=125>
-            <td><a href="/articles/<%= an_article.id %>"><%= an_article.headline %></a> (<a href="<%= an_article.url %>" target="_blank">Link</a>)</td>
+            <td><span><%= an_article.headline %></span> (<a href="<%= an_article.url %>" target="_blank">Link</a>)</td>
             <% if an_article.takeaway.present? %>
             
               <td><%= an_article.takeaway.body %></td>
@@ -40,9 +40,9 @@
 
             <% end %>
 
-            <td><%= an_article.created_at.strftime("%B %d, %Y") %>
+            <td><%= an_article.takeaway.created_at.strftime("%B %d, %Y") %>
 
-            <td><a href="/articles/<%= an_article.id %>">Details</a>></td>
+            <td><a href="/articles/<%= an_article.id %>">Details</a></td>
 
           </tr>
 

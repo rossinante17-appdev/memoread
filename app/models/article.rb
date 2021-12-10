@@ -15,7 +15,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  source_id   :integer
-#  takeaway_id :boolean
+#  takeaway_id :integer
 #  user_id     :integer
 #
 class Article < ApplicationRecord

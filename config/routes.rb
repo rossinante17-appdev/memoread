@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     # READ
     get("/takeaways", { :controller => "takeaways", :action => "index" })
 
-    get("/my_takeaways", controller: "takeaways", action: "user_takeaways")
+    get("/my_takeaways", controller: "takeaways", action: "things_ive_learned")
     
     get("/takeaways/:path_id", { :controller => "takeaways", :action => "show" })
     

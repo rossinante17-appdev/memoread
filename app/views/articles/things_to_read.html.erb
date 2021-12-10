@@ -30,19 +30,12 @@
 
             <td><img src="https://robohash.org/<%= an_article.id %>" height=125 width=125>
             <td><a href="/articles/<%= an_article.id %>"><%= an_article.headline %></a> (<a href="<%= an_article.url %>" target="_blank">Link</a>)</td>
-            <% if an_article.takeaway.present? %>
             
-              <td><%= an_article.takeaway.body %></td>
-
-            <% else %>
-
-              <td><a href="/articles/<%= an_article.id %>">Add a takeaway</a></td>
-
-            <% end %>
+            <td><a href="/articles/<%= an_article.id %>">Add a takeaway</a></td>
 
             <td><%= an_article.created_at.strftime("%B %d, %Y") %>
 
-            <td><a href="/articles/<%= an_article.id %>">Details</a>></td>
+            <td><a href="/articles/<%= an_article.id %>">Details</a></td>
 
           </tr>
 

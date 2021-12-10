@@ -42,6 +42,10 @@ class ArticlesController < ApplicationController
 
     @the_article = matching_articles.at(0)
 
+    matching_takeaways = Takeaway.where(article_id: @the_article.id)
+
+    @its_takeaway = matching_takeaways.at(0)
+
     render({ :template => "articles/show.html.erb" })
 
   end
@@ -74,7 +78,7 @@ class ArticlesController < ApplicationController
 
         twilio_client = Twilio::REST::Client.new(twilio_sid, twilio_token)
 
-        link_out_url = "https://3000-amethyst-louse-bmphrzge.ws-us21.gitpod.io/link/#{the_article.id}"
+        link_out_url = "https://3000-amethyst-louse-bmphrzge.ws-us23.gitpod.io/link/#{the_article.id}"
         
         sms_parameters = {
 
@@ -98,14 +102,16 @@ class ArticlesController < ApplicationController
         # Create an instance of the Mailgun Client and authenticate with AppDev key
         mg_client = Mailgun::Client.new(mg_api_key)
 
-        link_out_url = "https://3000-amethyst-louse-bmphrzge.ws-us21.gitpod.io/link/#{the_article.id}"
+        link_out_url = "https://3000-amethyst-louse-bmphrzge.ws-us23.gitpod.io/link/#{the_article.id}"
+
+        takeaway_url = "https://3000-amethyst-louse-bmphrzge.ws-us23.gitpod.io/articles/#{the_article.id}"
 
         # Craft email
         email_parameters =  { 
           :from => @current_user.email,
           :to => @current_user.email,
           :subject => "Memoread: #{the_article.headline}",
-          :text => "#{@current_user.username}, you requested this article from Memoread: #{the_article.headline} -- #{link_out_url}"
+          :text => "#{@current_user.username}, you requested this article from Memoread: #{the_article.headline} -- #{link_out_url}. When you've read the article, follow this link to commit a takeaway to Memoread: #{takeaway_url}"
         }
 
         # Send it
@@ -113,22 +119,29 @@ class ArticlesController < ApplicationController
 
       end
 
-      # Redirect
-      if the_article.email == true && the_article.text == true
-
-        redirect_to("/my_articles", { :notice => "Article added; text and email sent." })
-
-      elsif the_article.email == true && the_article.text == false
+      if the_article.read == true
         
-        redirect_to("/my_articles", notice: "Article added; email sent.")
-
-      elsif the_article.text == true && the_article.email == false
-
-        redirect_to("/my_articles", notice: "Article added; text sent.")
-
+        redirect_to("/articles/#{the_article.id}", notice: "Commit a takeaway to memory!")
+      
       else
 
-        redirect_to("/my_articles", notice: "Article added.")
+        if the_article.email == true && the_article.text == true
+          
+          redirect_to("/my_articles", { :notice => "Article added; text and email sent." })
+
+        elsif the_article.email == true && the_article.text == false
+          
+          redirect_to("/my_articles", notice: "Article added; email sent.")
+
+        elsif the_article.text == true && the_article.email == false
+
+          redirect_to("/my_articles", notice: "Article added; text sent.")
+
+        else
+
+          redirect_to("/my_articles", notice: "Article added.")
+
+        end
 
       end
 
