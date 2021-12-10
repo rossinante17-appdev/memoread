@@ -56,13 +56,18 @@ class ArticlesController < ApplicationController
     the_article = Article.new
     the_article.url = params.fetch("query_url")
     the_article.headline = params.fetch("query_headline")
-    # the_article.source_id = params.fetch("query_source_id")
+    the_article.source_id = params.fetch("query_source_id", nil)
     the_article.public = params.fetch("query_public", false)
-    the_article.user_id = @current_user.id
+    the_article.user_id = @current_user.id    
     the_article.read = params.fetch("query_read", false)
+    
     the_article.email = params.fetch("query_email", false)
     the_article.text = params.fetch("query_text", false)    
     the_article.reread_list = params.fetch("query_reread_list", false)
+    
+    if the_article.read == true 
+      the_article.read_at = DateTime.now        
+    end
 
 
     if the_article.valid?
@@ -127,19 +132,19 @@ class ArticlesController < ApplicationController
 
         if the_article.email == true && the_article.text == true
           
-          redirect_to("/my_articles", { :notice => "Article added; text and email sent." })
+          redirect_to("/things_to_read", { :notice => "Article added; text and email sent." })
 
         elsif the_article.email == true && the_article.text == false
           
-          redirect_to("/my_articles", notice: "Article added; email sent.")
+          redirect_to("/things_to_read", notice: "Article added; email sent.")
 
         elsif the_article.text == true && the_article.email == false
 
-          redirect_to("/my_articles", notice: "Article added; text sent.")
+          redirect_to("/things_to_read", notice: "Article added; text sent.")
 
         else
 
-          redirect_to("/my_articles", notice: "Article added.")
+          redirect_to("/things_to_read", notice: "Article added.")
 
         end
 
@@ -147,7 +152,7 @@ class ArticlesController < ApplicationController
 
     else
 
-      redirect_to("/my_articles", { :alert => "Article failed to create successfully." })
+      redirect_to("/things_to_read", { :alert => "Article failed to create successfully." })
 
     end
 
@@ -159,15 +164,10 @@ class ArticlesController < ApplicationController
 
     the_article.url = params.fetch("query_url")
     the_article.headline = params.fetch("query_headline")
-    the_article.takeaway_id = params.fetch("query_takeaway_id")
-    the_article.source_id = params.fetch("query_source_id")
-    the_article.public = params.fetch("query_public", false)
-    the_article.user_id = params.fetch("query_user_id")
-    the_article.unread_boolean = params.fetch("query_unread_boolean")
-    the_article.email = params.fetch("query_email", false)
-    the_article.text = params.fetch("query_text", false)
-    the_article.reread_list = params.fetch("query_reread_list", false)
-    the_article.read_at = params.fetch("query_read_at")
+    the_article.read = params.fetch("query_read", false)
+    if the_article.read == true 
+      the_article.read_at = DateTime.now
+    end
 
     if the_article.valid?
       

@@ -2,33 +2,41 @@
 
   <h1>Things I've learned</h1>
 
-  <div class="card">
+  <% if @list_of_takeaways.present? %>
+  
+    <div class="card">
 
-    <table border="1">
-
-      <tr>
-      
-          <th>Takeaway</th>
-          <th>Article</th>
-          <th>Committed to memory</th>
-      
-      </tr>
-
-      <% @list_of_takeaways.each do |a_takeaway| %>
+      <table border="1">
 
         <tr>
         
-          <td><%= a_takeaway.body %></td>
-          <td><a href="/articles/<%= a_takeaway.article.id %>"><%= a_takeaway.article.headline %></a></td>
-          <td><%= time_ago_in_words(a_takeaway.created_at) %></td>
+            <th>Takeaway</th>
+            <th>Article</th>
+            <th>Committed to memory</th>
         
         </tr>
+        
+        <% @list_of_takeaways.each do |a_takeaway| %>
 
-      <% end %>
+          <tr>
+          
+            <td><%= a_takeaway.body %></td>
+            <td><a href="/articles/<%= a_takeaway.article.id %>"><%= a_takeaway.article.headline %></a> (<a href="<%= a_takeaway.article.url %>" target="_blank">Link</a>)</td>
+            <td><%= time_ago_in_words(a_takeaway.created_at) %></td>
+          
+          </tr>
 
-    </table>
+        <% end %>
 
-  </div>
+      </table>
+
+    </div>
+
+  <% else %>
+
+    <span>You haven't learned anything yet</span>
+
+  <% end %>
 
 </div>
 

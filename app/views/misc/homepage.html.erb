@@ -30,7 +30,7 @@
 
     <% @things_to_read.each do |an_article| %>
     
-      <% if an_article.present? %>
+      <% if an_article.present? && an_article.read == false %>
       
         <div class="row text-center">
 
@@ -38,7 +38,7 @@
 
             <a href="/link/<%= an_article.id %>" target="_blank">
             
-              <span><%= an_article.headline %></span>
+              <span><%= an_article.headline %> (<a href="/articles/<%= an_article.id %>">Details</a>)</span>
               
             </a>
 

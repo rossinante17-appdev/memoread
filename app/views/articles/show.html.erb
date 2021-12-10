@@ -1,5 +1,6 @@
-<div>
-  <div>
+<div class="container mt-3">
+  <div class="card">
+    <div>
       <div>
         <% if @the_article.read == true %>        
           <a href="/things_ive_read">
@@ -11,195 +12,140 @@
           </a>
         <% end %>
       </div>
-    
-    <h1>
-      Article #<%= @the_article.id %> details
-    </h1>
+      
+      <h1>
+        <%= @the_article.headline %>
+      </h1>
 
-      <div>
-        <button type="button" class="btn btn-link">
-          <a href="/delete_article/<%= @the_article.id %>">
-            Delete article
-          </a>
-        </button>
-      </div>
+      <dl>
+        <dt>
+          <a href="<%= @the_article.url %>" target="_blank">Link</a>
+        </dt>
+        
+        <dt>
+          Headline
+        </dt>
+          <dd>
+            <%= @the_article.headline %>
+          </dd>
+
+        
+        <% if @its_takeaway.present? %>
+          
+          <dt>Takeaway</dt>
+            <dd><%= @its_takeaway.body %></dd>
+
+        <% end %>
+
+          
+        <% if @the_article.read == true %>
+        
+          <dt>Read</dt>
+            <dd>
+              You read this article <%= time_ago_in_words(@the_article.read_at) %>.
+            </dd>
+
+        <% else %>
+
+          <dt>Unread</dt>
+          <dd></dd>
+
+        <% end %>
+
+        <dt>
+          Added on
+        </dt>
+          <dd>
+            <%= @the_article.created_at.strftime("%B %d, %Y") %>
+          </dd>
+
+        <% if @its_takeaway.present? %>
+
+          <dt>You committed this article to Memoread on</dt>
+            <dd><%= @its_takeaway.created_at.strftime("%B %d, %Y") %></dd>
+
+        <% end %>
+
+        <dt>
+          <a href="/delete_article/<%= @the_article.id %>">Delete Article</a>
+        </dt>
+
+      </dl>
+    </div>
+  </div>
+
+  &nbsp;
+
+  <% if @its_takeaway.present? %>
+
+  <% else %>
+
+    <div class="card">
+
+      <form action="/insert_takeaway" method="post">
+
+        <input id="article_id" name="query_article_id" type="hidden" value="<%= @the_article.id %>">
+
+        <div> 
+        
+          <div class="form-group">
+            <label for="body_box">What do you want to remember from this article?</label>
+          </div>
+
+          <div class="form-group">
+            <textarea id="body_box" name="query_body" placeholder="Type a quick takeaway here..."></textarea>
+          </div>
+
+        </div>
+        
+        <div class="button-submit">
+          <button class="btn btn-primary">Commit to memory</button>
+        </div>
+
+      </form>
+
     </div>
 
-    <dl>
-      <dt>
-        <a href="<%= @the_article.url %>" target="_blank">Link</a>
-      </dt>
-      
-      <dt>
-        Headline
-      </dt>
-        <dd>
-          <%= @the_article.headline %>
-        </dd>
+    <hr>
 
-      
-      <% if @its_takeaway.present? %>
-        
-        <dt>Takeaway</dt>
-          <dd><%= @its_takeaway.body %></dd>
+  <% end %>
 
-      <% end %>
+  <div class="card">
+    <div>
+      <h2>
+        Edit article
+      </h2>
 
-      <dt>
-        Source
-      </dt>
-        <dd>
-          <%= @the_article.source_id %>
-        </dd>
+      <form action="/modify_article/<%= @the_article.id %>"  method="post" >
+        <div>
+          <label for="url_box">
+            Url
+          </label>
 
-      <dt>
-        Added on
-      </dt>
-        <dd>
-          <%= @the_article.created_at.strftime("%B %d, %Y") %>
-        </dd>
-
-      <% if @its_takeaway.present? %>
-
-        <dt>You committed this article to Memoread on</dt>
-          <dd><%= @its_takeaway.created_at.strftime("%B %d, %Y") %></dd>
-
-      <% end %>
-
-    </dl>
-  </div>
-</div>
-
-<hr>
-
-
-<% if @its_takeaway.present? %>
-
-<% else %>
-
-  <div>
-
-    <form action="/insert_takeaway" method="post">
-
-      <input id="article_id" name="query_article_id" type="hidden" value="<%= @the_article.id %>">
-
-      <div> 
-      
-        <div class="form-group">
-          <label for="body_box">What do you want to remember from this article?</label>
+          <input type="text" id="url_box" name="query_url" value="<%= @the_article.url %>">
         </div>
 
-        <div class="form-group">
-          <textarea id="body_box" name="query_body" placeholder="Type a quick takeaway here..."></textarea>
+        <div>
+          <label for="headline_box">
+            Headline
+          </label>
+
+          <input type="text" id="headline_box" name="query_headline" value="<%= @the_article.headline %>">
         </div>
 
-      </div>
-      
-      <div class="button-submit">
-        <button>Commit to memory</button>
-      </div>
+        <div>
+          <input type="checkbox" id="read_box" name="query_read" value="1" <%= "checked" if @the_article.read %>>
 
-    </form>
+          <label for="read_box">
+              Read?
+          </label>
+        </div>
 
+        <button class="btn btn-primary">
+          Update article
+        </button>
+      </form>
+    </div>
   </div>
 
-  <hr>
-
-<% end %>
-
-<div>
-  <div>
-    <h2>
-      Edit article
-    </h2>
-
-    <form action="/modify_article/<%= @the_article.id %>"  method="post" >
-      <div>
-        <label for="url_box">
-          Url
-        </label>
-
-        <input type="text" id="url_box" name="query_url" value="<%= @the_article.url %>">
-      </div>
-
-      <div>
-        <label for="headline_box">
-          Headline
-        </label>
-
-        <input type="text" id="headline_box" name="query_headline" value="<%= @the_article.headline %>">
-      </div>
-
-      <div>
-        <label for="takeaway_id_box">
-          takeaway
-        </label>
-
-        <input type="text" id="takeaway_id_box" name="query_takeaway_id" value="<%= @the_article.takeaway_id %>">
-      </div>
-
-      <div>
-        <label for="source_id_box">
-          Source
-        </label>
-
-        <input type="text" id="source_id_box" name="query_source_id" value="<%= @the_article.source_id %>">
-      </div>
-
-      <div>
-        <input type="checkbox" id="public_box" name="query_public" value="1" <%= "checked" if @the_article.public %>>
-
-        <label for="public_box">
-            Public
-        </label>
-      </div>
-
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_article.user_id %>">
-      </div>
-
-      <div>
-        <input type="checkbox" id="email_box" name="query_email" value="1" <%= "checked" if @the_article.email %>>
-
-        <label for="email_box">
-            Email
-        </label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="text_box" name="query_text" value="1" <%= "checked" if @the_article.text %>>
-
-        <label for="text_box">
-            Text
-        </label>
-      </div>
-
-      <div>
-        <input type="checkbox" id="reread_list_box" name="query_reread_list" value="1" <%= "checked" if @the_article.reread_list %>>
-
-        <label for="reread_list_box">
-            Reread list
-        </label>
-      </div>
-
-      <div>
-        <label for="read_at_box">
-          Read at
-        </label>
-
-        <input type="datetime-local" id="read_at_box" name="query_read_at"
-         value="<%= @the_article.read_at %>">
-      </div>
-
-      <button>
-        Update article
-      </button>
-    </form>
-  </div>
 </div>
-
-<hr>

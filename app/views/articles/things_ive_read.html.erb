@@ -40,7 +40,7 @@
 
             <% end %>
 
-            <td><%= an_article.takeaway.created_at.strftime("%B %d, %Y") %>
+            <td><%= an_article.read_at.strftime("%B %d, %Y") %>
 
             <td><a href="/articles/<%= an_article.id %>">Details</a></td>
 
@@ -53,6 +53,10 @@
     </div>    
 
     <hr>
+
+  <% else %>
+
+    <span>You haven't added anything you've read yet.</span>
 
   <% end %>
 
@@ -77,13 +81,6 @@
           
           <label for="headline_box">Headline:</label>
           <input type="text" id="headline_box" name="query_headline" placeholder="What do you want to call this article?">
-
-        </div>
-
-        <div>
-
-          <label for="source_id_box">Source</label>
-          <input type="text" id="source_id_box" name="query_source_id" placeholder="Ignore this for now.">
 
         </div>
 

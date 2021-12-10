@@ -47,6 +47,10 @@
 
     <hr>
 
+  <% else %>
+
+    <span>You haven't added anything to read yet.</span>
+
   <% end %>
 
   <div>
@@ -75,13 +79,6 @@
 
         <div>
 
-          <label for="source_id_box">Source</label>
-          <input type="text" id="source_id_box" name="query_source_id" placeholder="Ignore this for now.">
-
-        </div>
-
-        <div>
-
           <label for="read_box">Have you already read this article?</label>
           <input type="checkbox" id="read_box" name="query_read" value="1">
 
@@ -105,7 +102,7 @@
 
         <% end %>
 
-        <button>
+        <button class="btn btn-primary">
           Add article
         </button>
 
