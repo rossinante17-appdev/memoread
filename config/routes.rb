@@ -26,6 +26,9 @@ Rails.application.routes.draw do
 
   # Routes for the Article resource:
 
+    # NEW ARTICLE FORM
+    get("/new_article", controller: "articles", action: "article_form")
+  
     # CREATE
     post("/insert_article", { :controller => "articles", :action => "create" })
             

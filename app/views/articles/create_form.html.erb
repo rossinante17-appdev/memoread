@@ -1,0 +1,54 @@
+<h1>Add Something to Read Later</h1>
+
+<div class="container">
+
+  <form action="/insert_article" method="post">
+
+    <div class="form-group">
+      
+      <label for="headline_box">What do you want to read?</label>
+      
+    
+      <div>
+        <input id="headline_box" name="query_headline" class="form-control" placeholder="Enter a headline...">
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      
+      <label for="url_box">Where is it?</label>
+      
+    
+      <div>
+        <input id="url_box" name="query_url" class="form-control" placeholder="Paste URL here...">
+      </div>
+
+    </div>
+
+    <div class="form-group form-check">
+          
+      <input type="checkbox" class="form-check-input" id="email_check" name="query_email">
+
+      <label class="form-check-label" for="email_check">Email to self?</label>  
+    
+    </div>
+
+    
+    <% if @current_user.phone.present? %>
+      
+      <div class="form-group form-check">
+            
+        <input type="checkbox" class="form-check-input" id="text_check" name="query_text">
+
+        <label class="form-check-label" for="text_check">Text to self?</label>  
+      
+      </div>
+
+    <% end %> 
+
+    <button class="btn btn-primary">Save for Later</button>
+
+  </form>
+
+</div>

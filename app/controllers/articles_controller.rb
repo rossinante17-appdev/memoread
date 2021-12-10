@@ -8,6 +8,14 @@ class ArticlesController < ApplicationController
     render({ :template => "articles/user_articles.html.erb" })
   end
 
+  def article_form
+
+
+
+    render("/articles/create_form.html.erb")
+
+  end
+
   def show
 
     the_id = params.fetch("path_id")
@@ -26,7 +34,7 @@ class ArticlesController < ApplicationController
     the_article = Article.new
     the_article.url = params.fetch("query_url")
     the_article.headline = params.fetch("query_headline")
-    the_article.source_id = params.fetch("query_source_id")
+    # the_article.source_id = params.fetch("query_source_id")
     the_article.public = params.fetch("query_public", false)
     the_article.user_id = @current_user.id
     the_article.read = params.fetch("query_read", false)
