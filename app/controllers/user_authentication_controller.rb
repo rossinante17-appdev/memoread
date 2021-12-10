@@ -69,10 +69,6 @@ class UserAuthenticationController < ApplicationController
     @user.password_confirmation = params.fetch("query_password_confirmation")
     @user.username = params.fetch("query_username")
     @user.phone = params.fetch("query_phone")
-    @user.private = params.fetch("query_private", false)
-    @user.articles_count = params.fetch("query_articles_count")
-    @user.takeaways_count = params.fetch("query_takeaways_count")
-    @user.folders_count = params.fetch("query_folders_count")
     
     if @user.valid?
       @user.save
