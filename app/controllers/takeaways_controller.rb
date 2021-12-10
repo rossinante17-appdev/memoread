@@ -22,11 +22,15 @@ class TakeawaysController < ApplicationController
 
     @user_articles = @current_user.articles
 
-    if params.fetch("query_article_id").present?
+    if params.present?
 
-      the_id = params.fetch("query_article_id")
+      if params.fetch("query_article_id").present?
       
-      @matching_article = Article.where(id: the_id).first
+        the_id = params.fetch("query_article_id")
+        
+        @matching_article = Article.where(id: the_id).first
+
+      end
 
     end
      

@@ -1,12 +1,10 @@
-<h1>Memoread</h1>
-
 <div>  
 
-  <div class="container-fluid">
+  <div class="container">
 
     <div class="row text-center">
     
-      <div class="col-md-12">
+      <div class="col-md-4 offset-md-4">
       
         <h2>Things to Read<h2>
 
@@ -16,7 +14,7 @@
 
     <div class="row text-center">
 
-      <div class="col-md-6 offset-md-3">
+      <div class="col-md-4 offset-md-4">
       
         <span>Article</span>
       
@@ -30,11 +28,15 @@
       
         <div class="row text-center">
 
-          <a href="/link/<%= an_article.id %>">
-          
-            <span><%= an_article.headline %></span>
+          <div class="col-md-4 offset-md-4">
+
+            <a href="/link/<%= an_article.id %>">
             
-          </a>
+              <span><%= an_article.headline %></span>
+              
+            </a>
+
+          </div>
 
         </div>
       
@@ -44,7 +46,9 @@
 
   </div>
 
-  <div class="container-fluid">
+  <hr>
+
+  <div class="container">
 
     <div class="row text-center">
     

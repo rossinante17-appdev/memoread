@@ -1,5 +1,23 @@
+/* * {
+
+  border: 1px solid red;
+
+} */
+
+body {
+
+  padding-top: 64px;
+
+}
+
 .bg-purple {
 
   background-color: blueviolet;
+
+}
+
+.navbar {
+
+ font-family: "Passion One", sans-serif;
 
 }
