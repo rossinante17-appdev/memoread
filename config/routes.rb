@@ -68,6 +68,8 @@ Rails.application.routes.draw do
     post("/modify_user", { :controller => "user_authentication", :action => "update" })
     
     # DELETE RECORD
+    get("/delete_user", controller: "user_authentication", action: "delete_confirm")
+    
     get("/cancel_user_account", { :controller => "user_authentication", :action => "destroy" })
 
     # ------------------------------

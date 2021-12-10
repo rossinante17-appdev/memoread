@@ -83,11 +83,32 @@ class UserAuthenticationController < ApplicationController
     end
   end
 
+  def delete_confirm
+
+    render(template: "/user_authentication/delete_confirmation.html.erb")
+
+  end
+  
   def destroy
+    user_articles = @current_user.articles.all
+    user_takeaways = @current_user.takeaways.all
+
+    user_articles.each do |an_article|
+
+      an_article.destroy
+
+    end
+
+    user_takeaways.each do |a_takeaway|
+
+      a_takeaway.destroy
+
+    end
+    
     @current_user.destroy
     reset_session
     
-    redirect_to("/", { :notice => "User account cancelled" })
+    redirect_to("/", { :notice => "User account, articles, and takeaways deleted." })
   end
  
 end

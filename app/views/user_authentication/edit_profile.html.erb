@@ -1,9 +1,9 @@
-<div >
-  <h5>
-    Edit User Account
-  </h5>
+<div class="container mt-3">
+  <h1>
+    Edit User Profile
+  </h1>
 
-  <div>
+  <div class="card">
     <form action="/modify_user" method="post">
       <div>
         <label for="email_box">Email</label>
@@ -17,23 +17,7 @@
         <label for="phone_box">Phone</label>
         <input id="phone_box" name="query_phone" value="<%= @current_user.phone %>">
       </div>
-      <div>
-        <label for="private_box">Private</label>
-        <input id="private_box" name="query_private" type="checkbox" value="1" <%= "checked" if @current_user.private %>>
-      </div>
-      <div>
-        <label for="articles_count_box">Articles count</label>
-        <input id="articles_count_box" name="query_articles_count" value="<%= @current_user.articles_count %>">
-      </div>
-      <div>
-        <label for="takeaways_count_box">Takeaways count</label>
-        <input id="takeaways_count_box" name="query_takeaways_count" value="<%= @current_user.takeaways_count %>">
-      </div>
-      <div>
-        <label for="folders_count_box">Folders count</label>
-        <input id="folders_count_box" name="query_folders_count" value="<%= @current_user.folders_count %>">
-      </div>
-
+      
       <div>
         <label for="password_box">Password</label>
         <input id="password_box" name="query_password" placeholder="Choose a password..." type="password">
@@ -44,9 +28,20 @@
         <input id="password_confirmation_box" name="query_password_confirmation" placeholder="Confirm your password..." type="password">
       </div>
 
-      <button>
-        Update account
+      <button class="btn btn-primary">
+        Update Profile
       </button>
+
     </form>
+
+    &nbsp;
+
+    <div>
+      <form action="/delete_user">
+        <button class="btn btn-danger">Delete my account</button>
+      </form>
+    <div>
   </div>
+
+
 </div>

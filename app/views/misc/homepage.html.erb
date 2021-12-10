@@ -1,6 +1,6 @@
-<div>  
+<div class="container mt-3">  
 
-  <div class="container">
+  <div class="card">
 
     <div class="row text-center">
     
@@ -14,9 +14,15 @@
 
     <div class="row text-center">
 
-      <div class="col-md-4 offset-md-4">
+      <div class="col-md-3 offset-md-3">
       
-        <span>Article</span>
+        <span class="font-weight-bold">Article</span>
+      
+      </div>
+
+      <div class="col-md-3 offset-md-3">
+      
+        <span class="font-weight-bold">Added</span>
       
       </div>
 
@@ -28,11 +34,19 @@
       
         <div class="row text-center">
 
-          <div class="col-md-4 offset-md-4">
+          <div class="col-md-3 offset-md-3">
 
-            <a href="/link/<%= an_article.id %>">
+            <a href="/link/<%= an_article.id %>" target="_blank">
             
               <span><%= an_article.headline %></span>
+              
+            </a>
+
+          </div>
+
+          <div class="col-md-3 offset-md-3">
+
+            <span><%= time_ago_in_words(an_article.created_at) %></span>
               
             </a>
 
@@ -48,7 +62,7 @@
 
   <hr>
 
-  <div class="container">
+  <div class="card">
 
     <div class="row text-center">
     
@@ -64,13 +78,13 @@
 
       <div class="col-md-3 offset-md-3">
       
-        <span>Article</span>
+        <span class="font-weight-bold">Article</span>
       
       </div>
 
       <div class="col-md-3 offset-md-3">
       
-        <span>Takeaway</span>
+        <span class="font-weight-bold">Takeaway</span>
       
       </div>
 
