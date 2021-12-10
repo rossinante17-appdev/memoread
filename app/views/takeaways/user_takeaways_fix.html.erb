@@ -1,0 +1,66 @@
+<div class="container mt-3">
+
+  <h1>Things I've learned</h1>
+
+  <div class="card">
+
+    <table border="1">
+
+      <tr>
+      
+          <th>Takeaway</th>
+          <th>Article</th>
+          <th>Committed to memory</th>
+      
+      </tr>
+
+      <% @list_of_takeaways.each do |a_takeaway| %>
+
+        <tr>
+        
+          <td><%= a_takeaway.body %></td>
+          <td><%= a_takeaway.article.headline %></td>
+          <td><%= time_ago_in_words(a_takeaway.created_at) %></td>
+        
+        </tr>
+
+      <% end %>
+
+    </table>
+
+  </div>
+
+</div>
+
+<% if @user_articles.present? %>
+    <form action="/insert_takeaway" method="post">
+
+      <div>
+        <label for="article_selector">Which article?</label>
+      </div>
+
+      <div>
+        <select id="article_selector" name="query_article_id">
+          <option></option>
+          <% @user_articles.each do |an_article| %>
+
+            <option value="<%= an_article.id %>"><%= an_article.headline %></option>
+
+          <% end %>
+        </select>
+      </div>
+
+      <div>
+        <div>
+          <label for="body_box">What do you want to remember?</label>
+        </div>
+
+        <div>
+          <textarea id="takeaway_box" name="query_body" placeholder="Type your takeaway from the article here..."></textarea>
+        </div>
+      </div>
+
+      <button>Commit to memory</button>
+
+    </form>
+<% end %>

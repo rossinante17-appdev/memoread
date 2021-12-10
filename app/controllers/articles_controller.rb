@@ -8,9 +8,27 @@ class ArticlesController < ApplicationController
     render({ :template => "articles/user_articles.html.erb" })
   end
 
+  def things_to_read
+
+    matching_articles = @current_user.articles.order(created_at: :desc)
+
+    @unread_articles = matching_articles.where(read: false)
+
+    render("/articles/things_to_read.html.erb")
+
+  end
+
+  def things_ive_read
+
+    matching_articles = @current_user.articles.order(created_at: :desc)
+
+    @read_articles = matching_articles.where(read: true)
+
+    render("/articles/things_ive_read.html.erb")
+
+  end
+
   def article_form
-
-
 
     render("/articles/create_form.html.erb")
 
@@ -153,15 +171,15 @@ class ArticlesController < ApplicationController
     the_id = params.fetch("path_id")
     the_article = Article.where({ :id => the_id }).at(0)
 
-    its_takeaway = the_article.takeaway
+    its_takeaway = Takeaway.where(article_id: the_article.id).at(0)
 
-    the_article.destroy
-    
     if its_takeaway.present?
-      
+
       its_takeaway.destroy
 
     end
+
+    the_article.destroy
 
     redirect_to("/my_articles", { :alert => "Article deleted."} )
     

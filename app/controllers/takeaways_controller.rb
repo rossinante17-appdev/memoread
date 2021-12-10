@@ -14,26 +14,24 @@ class TakeawaysController < ApplicationController
 
     @list_of_takeaways = matching_takeaways.order({ :created_at => :desc })
 
-    render({ :template => "takeaways/user_takeaways.html.erb" })
+    @matching_articles = []
+    
+    @list_of_takeaways.each do |a_takeaway|
+
+      the_article = Article.where(id: a_takeaway.article_id)
+
+      @matching_articles.push(the_article)
+
+    end
+
+    render({ :template => "takeaways/user_takeaways_fix.html.erb" })
     
   end
 
   def takeaway_form
 
     @user_articles = @current_user.articles
-
-    if params.present?
-
-      if params.fetch("query_article_id").present?
-      
-        the_id = params.fetch("query_article_id")
-        
-        @matching_article = Article.where(id: the_id).first
-
-      end
-
-    end
-     
+       
     render(template: "/takeaways/create_form.html.erb")
 
   end

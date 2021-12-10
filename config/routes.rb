@@ -35,6 +35,10 @@ Rails.application.routes.draw do
     # READ
     get("/my_articles", { :controller => "articles", :action => "user_articles" })
 
+    get("/things_to_read", controller: "articles", action: "things_to_read")
+
+    get("/things_ive_read", controller: "articles", action: "things_ive_read")
+
     get("/articles", controller: "articles", action: "index")
     
     get("/articles/:path_id", { :controller => "articles", :action => "show" })

@@ -37,7 +37,7 @@
         <% the_takeaway = @the_article.takeaway %>
         
         <dt>
-          takeaway
+          Takeaway
         </dt>       
 
           <dd><%= the_takeaway.body %></dd>
@@ -85,12 +85,16 @@
 
       <input id="article_id" name="query_article_id" type="hidden" value="<%= @the_article.id %>">
 
-      <div class="form-group">
-        <label for="body_box">What do you want to remember from this article?</label>
-      </div>
+      <div>
+      
+        <div class="form-group">
+          <label for="body_box">What do you want to remember from this article?</label>
+        </div>
 
-      <div class="form-group">
-        <textarea id="body_box" name="query_body" placeholder="Type a quick takeaway here..."></textarea>
+        <div class="form-group">
+          <textarea id="body_box" name="query_body" placeholder="Type a quick takeaway here..."></textarea>
+        </div>
+
       </div>
       
       <div class="button-submit">

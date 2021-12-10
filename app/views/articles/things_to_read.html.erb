@@ -4,64 +4,57 @@
     
     <div>
       <h1>
-        <%= @current_user.username %>'s articles
+        Things to Read
       </h1>
     </div>
 
   </div>
 
-  <div class="card">
+  <% if @unread_articles.present? %>
+  
+    <div class="card">
 
-    <table border="1">
-
-      <tr>
-        <th></th>
-        <th>Article</th>
-        <th>Read?</th>
-        <th>Takeaway</th>
-        <th>Added on</th>
-        <th></th>
-      <tr>
-
-      <% @list_of_articles.each do |an_article| %>
+      <table border="1">
 
         <tr>
+          <th></th>
+          <th>Article</th>
+          <th>Takeaway</th>
+          <th>Added</th>
+          <th></th>
+        <tr>
 
-          <td><img src="https://robohash.org/<%= an_article.id %>" height=125 width=125>
-          <td><a href="/articles/<%= an_article.id %>"><%= an_article.headline %></a> (<a href="<%= an_article.url %>" target="_blank">Link</a>)</td>
-          <% if an_article.read_at.present? %>
+        <% @unread_articles.each do |an_article| %>
 
-            <td>Read</td>
+          <tr>
 
-          <% else %>
+            <td><img src="https://robohash.org/<%= an_article.id %>" height=125 width=125>
+            <td><a href="/articles/<%= an_article.id %>"><%= an_article.headline %></a> (<a href="<%= an_article.url %>" target="_blank">Link</a>)</td>
+            <% if an_article.takeaway.present? %>
+            
+              <td><%= an_article.takeaway.body %></td>
 
-            <td>Unread</td>
+            <% else %>
 
-          <% end %>
-          
-          <% if an_article.takeaway.present? %>
-          
-            <td><%= an_article.takeaway.body %></td>
+              <td><a href="/articles/<%= an_article.id %>">Add a takeaway</a></td>
 
-          <% else %>
+            <% end %>
 
-            <td><a href="/articles/<%= an_article.id %>">Add a takeaway</a></td>
+            <td><%= an_article.created_at.strftime("%B %d, %Y") %>
 
-          <% end %>
+            <td><a href="/articles/<%= an_article.id %>">Details</a>></td>
 
-          <td><%= an_article.created_at.strftime("%B %d, %Y") %>
+          </tr>
 
-          <td><a href="/articles/<%= an_article.id %>">Details</a>></td>
+        <% end %>
 
-        </tr>
+      </table>
 
-      <% end %>
+    </div>    
 
-    </table>
+    <hr>
 
-  </div>
-
-  <hr>
+  <% end %>
 
   <div>
     
